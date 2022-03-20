@@ -9,13 +9,16 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css?v=3.2.0">
+    @yield('css')
     <style>
-        .width{
+        .width {
             min-width: 150px !important;
         }
-        .user-name{
+
+        .user-name {
             font-size: 20px;
         }
+
     </style>
 </head>
 
@@ -71,9 +74,9 @@
                         <i class="far fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right width">
-                        <span class="dropdown-header user-name">{{$data->name}}</span>
+                        <span class="dropdown-header user-name">{{ $data->name }}</span>
                         <div class="dropdown-divider"></div>
-                        <a href="{{route('user.logout')}}" class="dropdown-item">
+                        <a href="{{ route('user.logout') }}" class="dropdown-item">
                             <i class="fas fa-sign-out-alt mr-2"></i>Logout
                         </a>
                     </div>
