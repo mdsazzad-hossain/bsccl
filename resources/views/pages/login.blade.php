@@ -9,6 +9,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
     <style>
@@ -99,9 +100,22 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
+    <script src="assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="assets/plugins/toastr/toastr.min.js"></script>
     <script src="assets/dist/js/adminlte.min.js"></script>
-
+    <script>
+         const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+    </script>
     <script>
         $(document).ready(function() {
             $('#loginForm').validate({
@@ -145,13 +159,19 @@
                     $.ajax({
                         url: "{{ route('user.login') }}",
                         method: "POST",
-                        data: $('#loginForm').serialize()
-                    }).done(function(data) {
-                        $('#loading').css('cssText', 'display: none !important');
-                        toastr.success('Login Successfull.')
-                        // window.location.href ='/dashboard';
-                    }).fails(function() {
-                        console.log('test');
+                        data: $('#loginForm').serialize(),
+                        success: function(res) {
+                            $('#loading').css('cssText', 'display: none !important');
+                            toastr.success('Login Successfull.')
+                            window.location.href ='/dashboard';
+                        },
+                        error: function() {
+                             $('#loading').css('cssText', 'display: none !important');
+                             Swal.fire({
+                                icon: 'error',
+                                title: 'Cridentials not match!'
+                            })
+                        }
                     })
                 }
             });

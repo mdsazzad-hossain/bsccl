@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
 class AuthController extends Controller
 {
     public function index()
@@ -27,22 +27,20 @@ class AuthController extends Controller
         ],200);
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        dd('ok');
-        //  if (Auth::attempt([
-        //     'email'=>$request->email,
-        //     'password'=>$request->password
-        // ])) {
-        //     dd('ok');
-        //     // return response()->json([
-        //     //     'msg'=>"success"
-        //     // ],200);
-        // }else{
-        //     return response()->json([
-        //         'msg'=>"success"
-        //     ],500);
-        // };
+         if (Auth::attempt([
+            'email'=>$request->email,
+            'password'=>$request->password
+        ])) {
+            return response()->json([
+                'msg'=>"success"
+            ],200);
+        }else{
+            return response()->json([
+                'msg'=>"Cridential not match!"
+            ],500);
+        };
     }
 
     public function show($id)
@@ -60,8 +58,11 @@ class AuthController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Auth::logout();
+
+        $request->session()->invalidate();
+        return redirect('/');
     }
 }
