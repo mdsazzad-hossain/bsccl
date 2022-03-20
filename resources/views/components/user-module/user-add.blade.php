@@ -122,4 +122,8 @@
         width: 100%;
     }
 
+    .card-footer {
+        background: none;
+    }
+
 </style>
