@@ -7,8 +7,7 @@
                 <small class="color-red">Only (.csv, .xls, .xlsx) file accepeted</small>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" name="file" accept=".csv,.xls,.xlsx" class="custom-file-input"
-                            id="file-input">
+                        <input type="file" name="file" class="custom-file-input" id="file-input">
                         <label class="custom-file-label" for="file-input">Choose file</label>
                     </div>
                 </div>
@@ -19,5 +18,3 @@
         </div>
     </form>
 </div>
-@section('js')
-@endsection

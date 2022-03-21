@@ -183,7 +183,7 @@
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     error.addClass('invalid-feedback');
-                    element.closest('.input-group').append(error);
+                    element.closest('.form-group').append(error);
                 },
                 highlight: function(element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
@@ -204,8 +204,10 @@
                         processData: false,
                         success: function(res) {
                             $('#loading').css('cssText', 'display: none !important');
-                            toastr.success('Data Upload Successfull.')
-                            // window.location.href = '/dashboard';
+                            toastr.success('File Upload Successfull.')
+                            $('#import').trigger("reset");
+                            $("#user-add-modal").modal('hide');
+                            window.location.href = '/user-list';
                         },
                         error: function() {
                             $('#loading').css('cssText', 'display: none !important');
