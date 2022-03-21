@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
         $data = auth()->user();
+        $model = User::orderBy('id', 'DESC')->get();
         return view('pages.user-module.user-list',[
-            'data'=>$data
+            'data'=>$data,
+            'users'=>$model
         ]);
     }
 
