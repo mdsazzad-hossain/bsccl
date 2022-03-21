@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileImportController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -30,4 +31,8 @@ Route::group(['middleware' => ['auth','user.role']], function () {
     Route::get('/logout', [AuthController::class, 'destroy'])->name('user.logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/user-list', [UserController::class, 'index'])->name('user.list');
+    Route::post('/store', [AuthController::class, 'store'])->name('register.store');
+
+    //File Import
+    Route::post('/user-import', [FileImportController::class, 'user_import'])->name('user.import');
 });

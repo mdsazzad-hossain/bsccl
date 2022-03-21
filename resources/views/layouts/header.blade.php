@@ -8,6 +8,11 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="assets/plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css?v=3.2.0">
     @yield('css')
     <style>
@@ -17,6 +22,20 @@
 
         .user-name {
             font-size: 20px;
+        }
+
+        .fa-spin {
+            font-size: 30px;
+            margin-top: 50% !important;
+            margin-left: 46%;
+        }
+
+        .card .overlay,
+        .info-box .overlay,
+        .overlay-wrapper .overlay,
+        .small-box .overlay {
+            background-color: rgba(221, 221, 221, .7) !important;
+            display: none !important;
         }
 
     </style>
