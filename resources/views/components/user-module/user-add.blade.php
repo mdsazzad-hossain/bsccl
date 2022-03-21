@@ -151,8 +151,9 @@
                             console.log('test')
                             $('#loading').css('cssText', 'display: none !important');
                             toastr.success('Data Upload Successfull.')
-                            // $("#user-add-modal").modal('hide');
-                            // window.location.href = '/user-list';
+                            $('#add-user').trigger("reset");
+                            $("#user-add-modal").modal('hide');
+                            window.location.href = '/user-list';
                         },
                         error: function() {
                             $('#loading').css('cssText', 'display: none !important');
