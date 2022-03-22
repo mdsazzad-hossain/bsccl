@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth','user.role']], function () {
     Route::get('/logout', [AuthController::class, 'destroy'])->name('user.logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/user-list', [UserController::class, 'index'])->name('user.list');
+    Route::get('/system-user-list', [UserController::class, 'system_user'])->name('system.user.list');
     Route::post('/store', [AuthController::class, 'store'])->name('register.store');
 
     //File Import

@@ -48,6 +48,28 @@
                                             placeholder="Enter Password">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>User Type</label>
+                                        <select class="form-control" style="width: 100%;" tabindex="-1"
+                                            aria-hidden="true">
+                                            <option selected="selected" disabled>Select type</option>
+                                            <option value="1">IPLC</option>
+                                            <option value="2">IP Transit</option>
+                                            <option value="3">Colocation Service</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>User Role</label>
+                                        <select class="form-control" style="width: 100%;">
+                                            <option value="3" selected="selected">User</option>
+                                            <option value="2">Admin</option>
+                                            <option value="1">Super Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>

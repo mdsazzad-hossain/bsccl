@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>User/Coustomer List</h1>
+                        <h1>User List</h1>
                     </div>
                     <div class="col-md-6 text-right">
                         <button type="button" data-toggle="modal" data-target="#user-add-modal"
@@ -34,7 +34,7 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Address</th>
-                                            {{-- <th>Role</th> --}}
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -46,13 +46,13 @@
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->phone ? $item->phone : 'Data not found' }}</td>
                                                 <td>{{ $item->address }}</td>
-                                                {{-- <td>
+                                                <td>
                                                     @if ($data->role === 1)
                                                         <span class="badge badge-success">Super Admin</span>
                                                     @else
                                                         <span class="badge badge-info">User</span>
                                                     @endif
-                                                </td> --}}
+                                                </td>
                                                 <td>
                                                     <button type="button" title="View Details"
                                                         class="btn btn-success btn-sm">
