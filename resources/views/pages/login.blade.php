@@ -48,13 +48,17 @@
     </style>
 </head>
 
-<body class="hold-transition login-page bg">
-    <div class="login-box">
+<body class="hold-transition login-page">
+    <div id="app">
+        <example-component></example-component>
+    </div>
+    {{-- <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <img width="100" src="/assets/dist/img/logo.png" alt="">
                 <h4 class="font-weight-normal">Bangladesh Submerine Cable Company Limited</h4>
             </div>
+
             <div class="overlay" id="loading">
                 <i class="fa fa-spinner fa-spin"></i>
             </div>
@@ -94,7 +98,7 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-    </div>
+    </div> --}}
 
     <script src="assets/plugins/jquery/jquery.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -104,7 +108,7 @@
     <script src="assets/plugins/toastr/toastr.min.js"></script>
     <script src="assets/dist/js/adminlte.min.js"></script>
     <script>
-         const Toast = Swal.mixin({
+        const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -163,11 +167,11 @@
                         success: function(res) {
                             $('#loading').css('cssText', 'display: none !important');
                             toastr.success('Login Successfull.')
-                            window.location.href ='/dashboard';
+                            window.location.href = '/dashboard';
                         },
                         error: function() {
-                             $('#loading').css('cssText', 'display: none !important');
-                             Swal.fire({
+                            $('#loading').css('cssText', 'display: none !important');
+                            Swal.fire({
                                 icon: 'error',
                                 title: 'Cridentials not match!'
                             })

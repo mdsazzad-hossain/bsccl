@@ -18,6 +18,29 @@
                     <a href="#" class="nav-link">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>
+                            Configuration
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('user.list') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('role.permission.list') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Role & Permission</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <p>
                             Users
                             <i class="right fas fa-angle-left"></i>
                         </p>
