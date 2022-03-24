@@ -8,10 +8,7 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue").default
-);
+Vue.component("app-component", require("./components/App.vue").default);
 
 //sweetalert2
 import Swal from "sweetalert2";
@@ -31,11 +28,10 @@ window.Swal = Swal;
 window.Toast = Toast;
 
 const router = new VueRouter({
-    mode: "hash",
+    mode: "history",
     routes,
 });
-
 new Vue({
-    render: (h) => h("example-component"),
+    render: (h) => h("app-component"),
     router,
 }).$mount("#app");

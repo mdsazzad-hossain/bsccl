@@ -177,7 +177,7 @@
                     }).done(function(data) {
                         $('#loading').css('cssText', 'display: none !important');
                         toastr.success('Data Upload Successfull.')
-                        window.location.href ='/';
+                        window.location.href = '/';
                     });
 
                 }

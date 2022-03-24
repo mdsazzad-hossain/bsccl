@@ -48,11 +48,8 @@
     </style>
 </head>
 
-<body class="hold-transition login-page">
-    <div id="app">
-        <example-component></example-component>
-    </div>
-    {{-- <div class="login-box">
+<body class="hold-transition login-page bg">
+    <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <img width="100" src="/assets/dist/img/logo.png" alt="">
@@ -98,7 +95,7 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-    </div> --}}
+    </div>
 
     <script src="assets/plugins/jquery/jquery.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

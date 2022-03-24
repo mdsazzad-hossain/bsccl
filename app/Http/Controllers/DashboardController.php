@@ -9,7 +9,7 @@ class DashboardController extends Controller
     public function index()
     {
         $data = auth()->user();
-        return view('layouts.master',[
+        return view('layouts.app',[
             'data'=>$data
         ]);
     }
