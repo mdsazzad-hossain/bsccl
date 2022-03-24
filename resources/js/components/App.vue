@@ -81,7 +81,11 @@
                     >
                         <span class="dropdown-header user-name">Admin</span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a
+                            href="javascript:void(0)"
+                            @click="logout()"
+                            class="dropdown-item"
+                        >
                             <i class="fas fa-sign-out-alt mr-2"></i>Logout
                         </a>
                     </div>
@@ -134,10 +138,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <router-link
+                                        :to="{ name: 'RolePermission' }"
+                                        class="nav-link"
+                                    >
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Role & Permission</p>
-                                    </a>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
@@ -215,8 +222,27 @@
 <script>
 export default {
     name: "App",
+    methods: {
+        logout() {
+            axios
+                .get("/logout")
+                .then((res) => {
+                    Toast.fire({
+                        icon: "success",
+                        title: "Logout Successfull.",
+                    });
+                    window.location.href = "/";
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "wrong creidentials!",
+                    });
+                });
+        },
+    },
     mounted() {
-        console.log("Component mounted.");
+        console.log("test");
     },
 };
 </script>

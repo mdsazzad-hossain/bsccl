@@ -41,6 +41,4 @@ Route::group(['middleware' => ['auth','user.role']], function () {
     //Role & Permission
     Route::get('/role-permission-list', [RolePermissionController::class, 'index'])->name('role.permission.list');
 });
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

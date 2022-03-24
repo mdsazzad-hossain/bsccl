@@ -63,6 +63,8 @@ class AuthController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-        return redirect('/');
+        return response([
+            'msg'=> "Logout"
+        ],200);
     }
 }
