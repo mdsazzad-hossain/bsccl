@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Configuration;
 
 use App\Http\Controllers\Controller;
+use App\Models\Configuration\Menu;
+use App\Models\Configuration\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RolePermissionController extends Controller
 {
@@ -33,7 +36,31 @@ class RolePermissionController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        // return $request['menus'];
+        try {
+            DB::transaction();
+            $roleModels = Role::create($request->all());
+            $manus = $request['menus'];
+            foreach ($manus as $key => $value) {
+                $menu = Menu::create([
+                    'role_id'=> $roleModels->id,
+                    'menu_name'=> $value['title'],
+                    'm_id'=> $value['title_value']
+                ]);
+                $menu->create_permission($value['permission']);
+            }
+
+            DB::commit();
+            return response([
+                'msg'=> 'Success'
+            ],201);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response([
+                'msg'=> $th
+            ],500);
+        }
+
     }
 
     /**

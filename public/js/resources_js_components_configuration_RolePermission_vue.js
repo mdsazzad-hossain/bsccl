@@ -227,11 +227,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       rpData: {
-        name: "",
+        role_name: "",
         menus: [{
           title: "Users",
           title_value: "",
@@ -574,9 +576,10 @@ var render = function () {
                                                             name: "model",
                                                             rawName: "v-model",
                                                             value:
-                                                              _vm.rpData.name,
+                                                              _vm.rpData
+                                                                .role_name,
                                                             expression:
-                                                              "rpData.name",
+                                                              "\n                                                        rpData.role_name\n                                                    ",
                                                           },
                                                         ],
                                                         staticClass:
@@ -589,7 +592,8 @@ var render = function () {
                                                         },
                                                         domProps: {
                                                           value:
-                                                            _vm.rpData.name,
+                                                            _vm.rpData
+                                                              .role_name,
                                                         },
                                                         on: {
                                                           input: function (
@@ -603,7 +607,7 @@ var render = function () {
                                                             }
                                                             _vm.$set(
                                                               _vm.rpData,
-                                                              "name",
+                                                              "role_name",
                                                               $event.target
                                                                 .value
                                                             )

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'menu_id',
+        'create',
+        'edit',
+        'update',
+        'delete'
+    ];
 }

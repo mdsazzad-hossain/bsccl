@@ -20,7 +20,7 @@ class CreatePermissionsTable extends Migration
             $table->integer('create')->nullable();
             $table->integer('edit')->nullable();
             $table->integer('delete')->nullable();
-            $table->integer('view')->nullable();
+            $table->integer('update')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

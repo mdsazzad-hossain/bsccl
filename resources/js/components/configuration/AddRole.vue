@@ -34,7 +34,9 @@
                                                     >
                                                     <input
                                                         type="text"
-                                                        v-model="rpData.name"
+                                                        v-model="
+                                                            rpData.role_name
+                                                        "
                                                         class="form-control"
                                                         id="role_name"
                                                         placeholder="Enter role name"
@@ -219,7 +221,7 @@ export default {
     data() {
         return {
             rpData: {
-                name: "",
+                role_name: "",
                 menus: [
                     {
                         title: "Users",
