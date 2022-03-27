@@ -57,11 +57,7 @@ export default {
     components: {
         AddRole,
     },
-    methods: {
-        visibleModal() {
-            this.$refs.modal.show();
-        },
-    },
+    methods: {},
 };
 </script>
 <style lang=""></style>

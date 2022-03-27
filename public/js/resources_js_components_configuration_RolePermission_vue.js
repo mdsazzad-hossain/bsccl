@@ -203,13 +203,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       rpData: {
         name: "",
         menus: [{
-          title: "",
+          title: "Users",
+          title_value: "",
           permission: [{
             create: "",
             edit: "",
@@ -217,31 +242,8 @@ __webpack_require__.r(__webpack_exports__);
             "delete": ""
           }]
         }, {
-          title: "",
-          permission: [{
-            create: "",
-            edit: "",
-            update: "",
-            "delete": ""
-          }]
-        }, {
-          title: "",
-          permission: [{
-            create: "",
-            edit: "",
-            update: "",
-            "delete": ""
-          }]
-        }, {
-          title: "",
-          permission: [{
-            create: "",
-            edit: "",
-            update: "",
-            "delete": ""
-          }]
-        }, {
-          title: "",
+          title: "Services",
+          title_value: "",
           permission: [{
             create: "",
             edit: "",
@@ -251,6 +253,22 @@ __webpack_require__.r(__webpack_exports__);
         }]
       }
     };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      axios.post("/store-role-permission", this.rpData).then(function (res) {
+        console.log(res);
+        Toast.fire({
+          icon: "success",
+          title: "Logout Successfull."
+        }); // window.location.href = "/";
+      })["catch"](function () {
+        Swal.fire({
+          icon: "warning",
+          title: "wrong creidentials!"
+        });
+      });
+    }
   }
 });
 
@@ -325,11 +343,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AddRole: _AddRole_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: {
-    visibleModal: function visibleModal() {
-      this.$refs.modal.show();
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -499,449 +513,822 @@ var render = function () {
             _c("div", { staticClass: "card card-primary" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("form", { attrs: { id: "add-user" } }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Role Name"),
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.rpData.name,
-                              expression: "rpData.name",
-                            },
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "role_name",
-                            placeholder: "Enter role name",
-                          },
-                          domProps: { value: _vm.rpData.name },
-                          on: {
-                            input: function ($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.rpData, "name", $event.target.value)
-                            },
-                          },
-                        }),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "row" },
-                      _vm._l(_vm.rpData.menus, function (item, index) {
-                        return _c(
-                          "div",
-                          { key: index, staticClass: "col-md-4 mb-2" },
-                          [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("ValidationObserver", {
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function (ref) {
+                          var handleSubmit = ref.handleSubmit
+                          return [
                             _c(
-                              "div",
-                              { staticClass: "custom-control custom-checkbox" },
+                              "form",
+                              {
+                                on: {
+                                  submit: function ($event) {
+                                    $event.preventDefault()
+                                    return handleSubmit(_vm.onSubmit)
+                                  },
+                                },
+                              },
                               [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: item.title,
-                                      expression: "item.title",
-                                    },
-                                  ],
-                                  staticClass: "custom-control-input",
-                                  attrs: {
-                                    type: "checkbox",
-                                    id: "menu" + index,
-                                  },
-                                  domProps: {
-                                    checked: Array.isArray(item.title)
-                                      ? _vm._i(item.title, null) > -1
-                                      : item.title,
-                                  },
-                                  on: {
-                                    change: function ($event) {
-                                      var $$a = item.title,
-                                        $$el = $event.target,
-                                        $$c = $$el.checked ? true : false
-                                      if (Array.isArray($$a)) {
-                                        var $$v = null,
-                                          $$i = _vm._i($$a, $$v)
-                                        if ($$el.checked) {
-                                          $$i < 0 &&
-                                            _vm.$set(
-                                              item,
-                                              "title",
-                                              $$a.concat([$$v])
-                                            )
-                                        } else {
-                                          $$i > -1 &&
-                                            _vm.$set(
-                                              item,
-                                              "title",
-                                              $$a
-                                                .slice(0, $$i)
-                                                .concat($$a.slice($$i + 1))
-                                            )
-                                        }
-                                      } else {
-                                        _vm.$set(item, "title", $$c)
-                                      }
-                                    },
-                                  },
-                                }),
+                                _c("div", { staticClass: "row" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-md-12" },
+                                    [
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "Role Name",
+                                          rules: "required",
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "form-group",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "label",
+                                                        {
+                                                          attrs: {
+                                                            for: "name",
+                                                          },
+                                                        },
+                                                        [_vm._v("Role Name")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.rpData.name,
+                                                            expression:
+                                                              "rpData.name",
+                                                          },
+                                                        ],
+                                                        staticClass:
+                                                          "form-control",
+                                                        attrs: {
+                                                          type: "text",
+                                                          id: "role_name",
+                                                          placeholder:
+                                                            "Enter role name",
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.rpData.name,
+                                                        },
+                                                        on: {
+                                                          input: function (
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              _vm.rpData,
+                                                              "name",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          },
+                                                        },
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "invalid-feedback d-block",
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(errors[0])
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          true
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]),
                                 _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-control-label",
-                                    attrs: { for: "menu" + index },
-                                  },
-                                  [_vm._v("Menu Name")]
-                                ),
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "row" },
+                                    _vm._l(
+                                      _vm.rpData.menus,
+                                      function (item, index) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: index,
+                                            staticClass: "col-md-4 mb-2",
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "custom-control custom-checkbox",
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: item.title_value,
+                                                      expression:
+                                                        "\n                                                        item.title_value\n                                                    ",
+                                                    },
+                                                  ],
+                                                  staticClass:
+                                                    "custom-control-input",
+                                                  attrs: {
+                                                    type: "checkbox",
+                                                    id: "menu" + index,
+                                                  },
+                                                  domProps: {
+                                                    checked: Array.isArray(
+                                                      item.title_value
+                                                    )
+                                                      ? _vm._i(
+                                                          item.title_value,
+                                                          null
+                                                        ) > -1
+                                                      : item.title_value,
+                                                  },
+                                                  on: {
+                                                    change: function ($event) {
+                                                      var $$a =
+                                                          item.title_value,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = null,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            _vm.$set(
+                                                              item,
+                                                              "title_value",
+                                                              $$a.concat([$$v])
+                                                            )
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            _vm.$set(
+                                                              item,
+                                                              "title_value",
+                                                              $$a
+                                                                .slice(0, $$i)
+                                                                .concat(
+                                                                  $$a.slice(
+                                                                    $$i + 1
+                                                                  )
+                                                                )
+                                                            )
+                                                        }
+                                                      } else {
+                                                        _vm.$set(
+                                                          item,
+                                                          "title_value",
+                                                          $$c
+                                                        )
+                                                      }
+                                                    },
+                                                  },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "custom-control-label",
+                                                    attrs: {
+                                                      for: "menu" + index,
+                                                    },
+                                                  },
+                                                  [_vm._v(_vm._s(item.title))]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(
+                                              item.permission,
+                                              function (itm, index1) {
+                                                return _c(
+                                                  "div",
+                                                  {
+                                                    key: index1,
+                                                    staticClass:
+                                                      "row mt-2 ml-3",
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-md-12",
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "custom-control custom-checkbox",
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              directives: [
+                                                                {
+                                                                  name: "model",
+                                                                  rawName:
+                                                                    "v-model",
+                                                                  value:
+                                                                    itm.create,
+                                                                  expression:
+                                                                    "\n                                                                itm.create\n                                                            ",
+                                                                },
+                                                              ],
+                                                              staticClass:
+                                                                "custom-control-input",
+                                                              attrs: {
+                                                                type: "checkbox",
+                                                                id:
+                                                                  "per" +
+                                                                  index1 +
+                                                                  index,
+                                                                checked: "",
+                                                              },
+                                                              domProps: {
+                                                                checked:
+                                                                  Array.isArray(
+                                                                    itm.create
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        itm.create,
+                                                                        null
+                                                                      ) > -1
+                                                                    : itm.create,
+                                                              },
+                                                              on: {
+                                                                change:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        itm.create,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c =
+                                                                        $$el.checked
+                                                                          ? true
+                                                                          : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v =
+                                                                          null,
+                                                                        $$i =
+                                                                          _vm._i(
+                                                                            $$a,
+                                                                            $$v
+                                                                          )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "create",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v,
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "create",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        itm,
+                                                                        "create",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  },
+                                                              },
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "label",
+                                                              {
+                                                                staticClass:
+                                                                  "custom-control-label",
+                                                                attrs: {
+                                                                  for:
+                                                                    "per" +
+                                                                    index1 +
+                                                                    index,
+                                                                },
+                                                              },
+                                                              [_vm._v("Create")]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-md-12",
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "custom-control custom-checkbox",
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              directives: [
+                                                                {
+                                                                  name: "model",
+                                                                  rawName:
+                                                                    "v-model",
+                                                                  value:
+                                                                    itm.edit,
+                                                                  expression:
+                                                                    "\n                                                                itm.edit\n                                                            ",
+                                                                },
+                                                              ],
+                                                              staticClass:
+                                                                "custom-control-input",
+                                                              attrs: {
+                                                                type: "checkbox",
+                                                                id:
+                                                                  "per2" +
+                                                                  index1 +
+                                                                  index,
+                                                                checked: "",
+                                                              },
+                                                              domProps: {
+                                                                checked:
+                                                                  Array.isArray(
+                                                                    itm.edit
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        itm.edit,
+                                                                        null
+                                                                      ) > -1
+                                                                    : itm.edit,
+                                                              },
+                                                              on: {
+                                                                change:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        itm.edit,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c =
+                                                                        $$el.checked
+                                                                          ? true
+                                                                          : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v =
+                                                                          null,
+                                                                        $$i =
+                                                                          _vm._i(
+                                                                            $$a,
+                                                                            $$v
+                                                                          )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "edit",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v,
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "edit",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        itm,
+                                                                        "edit",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  },
+                                                              },
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "label",
+                                                              {
+                                                                staticClass:
+                                                                  "custom-control-label",
+                                                                attrs: {
+                                                                  for:
+                                                                    "per2" +
+                                                                    index1 +
+                                                                    index,
+                                                                },
+                                                              },
+                                                              [_vm._v("Edit")]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-md-12",
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "custom-control custom-checkbox",
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              directives: [
+                                                                {
+                                                                  name: "model",
+                                                                  rawName:
+                                                                    "v-model",
+                                                                  value:
+                                                                    itm.update,
+                                                                  expression:
+                                                                    "\n                                                                itm.update\n                                                            ",
+                                                                },
+                                                              ],
+                                                              staticClass:
+                                                                "custom-control-input",
+                                                              attrs: {
+                                                                type: "checkbox",
+                                                                id:
+                                                                  "per3" +
+                                                                  index1 +
+                                                                  index,
+                                                                checked: "",
+                                                              },
+                                                              domProps: {
+                                                                checked:
+                                                                  Array.isArray(
+                                                                    itm.update
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        itm.update,
+                                                                        null
+                                                                      ) > -1
+                                                                    : itm.update,
+                                                              },
+                                                              on: {
+                                                                change:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        itm.update,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c =
+                                                                        $$el.checked
+                                                                          ? true
+                                                                          : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v =
+                                                                          null,
+                                                                        $$i =
+                                                                          _vm._i(
+                                                                            $$a,
+                                                                            $$v
+                                                                          )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "update",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v,
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "update",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        itm,
+                                                                        "update",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  },
+                                                              },
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "label",
+                                                              {
+                                                                staticClass:
+                                                                  "custom-control-label",
+                                                                attrs: {
+                                                                  for:
+                                                                    "per3" +
+                                                                    index1 +
+                                                                    index,
+                                                                },
+                                                              },
+                                                              [_vm._v("Update")]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-md-12",
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "custom-control custom-checkbox",
+                                                          },
+                                                          [
+                                                            _c("input", {
+                                                              directives: [
+                                                                {
+                                                                  name: "model",
+                                                                  rawName:
+                                                                    "v-model",
+                                                                  value:
+                                                                    itm.delete,
+                                                                  expression:
+                                                                    "\n                                                                itm.delete\n                                                            ",
+                                                                },
+                                                              ],
+                                                              staticClass:
+                                                                "custom-control-input",
+                                                              attrs: {
+                                                                type: "checkbox",
+                                                                id:
+                                                                  "per4" +
+                                                                  index1 +
+                                                                  index,
+                                                                checked: "",
+                                                              },
+                                                              domProps: {
+                                                                checked:
+                                                                  Array.isArray(
+                                                                    itm.delete
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        itm.delete,
+                                                                        null
+                                                                      ) > -1
+                                                                    : itm.delete,
+                                                              },
+                                                              on: {
+                                                                change:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        itm.delete,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c =
+                                                                        $$el.checked
+                                                                          ? true
+                                                                          : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v =
+                                                                          null,
+                                                                        $$i =
+                                                                          _vm._i(
+                                                                            $$a,
+                                                                            $$v
+                                                                          )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "delete",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v,
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            itm,
+                                                                            "delete",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        itm,
+                                                                        "delete",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  },
+                                                              },
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "label",
+                                                              {
+                                                                staticClass:
+                                                                  "custom-control-label",
+                                                                attrs: {
+                                                                  for:
+                                                                    "per4" +
+                                                                    index1 +
+                                                                    index,
+                                                                },
+                                                              },
+                                                              [_vm._v("Delete")]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ]
+                                                )
+                                              }
+                                            ),
+                                          ],
+                                          2
+                                        )
+                                      }
+                                    ),
+                                    0
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "text-right" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "submit" },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            Submit\n                                        "
+                                        ),
+                                      ]
+                                    ),
+                                  ]),
+                                ]),
                               ]
                             ),
-                            _vm._v(" "),
-                            _vm._l(item.permission, function (itm, index1) {
-                              return _c(
-                                "div",
-                                { key: index1, staticClass: "row mt-2 ml-3" },
-                                [
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox",
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: itm.create,
-                                              expression: "itm.create",
-                                            },
-                                          ],
-                                          staticClass: "custom-control-input",
-                                          attrs: {
-                                            type: "checkbox",
-                                            id: "per" + index1 + index,
-                                            checked: "",
-                                          },
-                                          domProps: {
-                                            checked: Array.isArray(itm.create)
-                                              ? _vm._i(itm.create, null) > -1
-                                              : itm.create,
-                                          },
-                                          on: {
-                                            change: function ($event) {
-                                              var $$a = itm.create,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked
-                                                  ? true
-                                                  : false
-                                              if (Array.isArray($$a)) {
-                                                var $$v = null,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "create",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "create",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(itm, "create", $$c)
-                                              }
-                                            },
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "custom-control-label",
-                                            attrs: {
-                                              for: "per" + index1 + index,
-                                            },
-                                          },
-                                          [_vm._v("Create")]
-                                        ),
-                                      ]
-                                    ),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox",
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: itm.edit,
-                                              expression: "itm.edit",
-                                            },
-                                          ],
-                                          staticClass: "custom-control-input",
-                                          attrs: {
-                                            type: "checkbox",
-                                            id: "per2" + index1 + index,
-                                            checked: "",
-                                          },
-                                          domProps: {
-                                            checked: Array.isArray(itm.edit)
-                                              ? _vm._i(itm.edit, null) > -1
-                                              : itm.edit,
-                                          },
-                                          on: {
-                                            change: function ($event) {
-                                              var $$a = itm.edit,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked
-                                                  ? true
-                                                  : false
-                                              if (Array.isArray($$a)) {
-                                                var $$v = null,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "edit",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "edit",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(itm, "edit", $$c)
-                                              }
-                                            },
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "custom-control-label",
-                                            attrs: {
-                                              for: "per2" + index1 + index,
-                                            },
-                                          },
-                                          [_vm._v("Edit")]
-                                        ),
-                                      ]
-                                    ),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox",
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: itm.update,
-                                              expression: "itm.update",
-                                            },
-                                          ],
-                                          staticClass: "custom-control-input",
-                                          attrs: {
-                                            type: "checkbox",
-                                            id: "per3" + index1 + index,
-                                            checked: "",
-                                          },
-                                          domProps: {
-                                            checked: Array.isArray(itm.update)
-                                              ? _vm._i(itm.update, null) > -1
-                                              : itm.update,
-                                          },
-                                          on: {
-                                            change: function ($event) {
-                                              var $$a = itm.update,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked
-                                                  ? true
-                                                  : false
-                                              if (Array.isArray($$a)) {
-                                                var $$v = null,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "update",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "update",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(itm, "update", $$c)
-                                              }
-                                            },
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "custom-control-label",
-                                            attrs: {
-                                              for: "per3" + index1 + index,
-                                            },
-                                          },
-                                          [_vm._v("Update")]
-                                        ),
-                                      ]
-                                    ),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-12" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox",
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: itm.delete,
-                                              expression: "itm.delete",
-                                            },
-                                          ],
-                                          staticClass: "custom-control-input",
-                                          attrs: {
-                                            type: "checkbox",
-                                            id: "per4" + index1 + index,
-                                            checked: "",
-                                          },
-                                          domProps: {
-                                            checked: Array.isArray(itm.delete)
-                                              ? _vm._i(itm.delete, null) > -1
-                                              : itm.delete,
-                                          },
-                                          on: {
-                                            change: function ($event) {
-                                              var $$a = itm.delete,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked
-                                                  ? true
-                                                  : false
-                                              if (Array.isArray($$a)) {
-                                                var $$v = null,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "delete",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      itm,
-                                                      "delete",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(itm, "delete", $$c)
-                                              }
-                                            },
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "custom-control-label",
-                                            attrs: {
-                                              for: "per4" + index1 + index,
-                                            },
-                                          },
-                                          [_vm._v("Delete")]
-                                        ),
-                                      ]
-                                    ),
-                                  ]),
-                                ]
-                              )
-                            }),
-                          ],
-                          2
-                        )
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _vm._m(2),
-                  ]),
-                ]),
-              ]),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
+                ],
+                1
+              ),
             ]),
           ]),
         ]),
@@ -979,22 +1366,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "overlay", attrs: { id: "loading" } }, [
       _c("i", { staticClass: "fa fa-spinner fa-spin" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\n                                        Submit\n                                    "
-          ),
-        ]
-      ),
     ])
   },
 ]

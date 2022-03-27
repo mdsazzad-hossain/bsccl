@@ -27,6 +27,13 @@ const Toast = Swal.mixin({
 window.Swal = Swal;
 window.Toast = Toast;
 
+//vee-validator
+import { ValidationProvider } from "vee-validate/dist/vee-validate.full.esm";
+import { ValidationObserver } from "vee-validate";
+
+Vue.component("ValidationProvider", ValidationProvider);
+Vue.component("ValidationObserver", ValidationObserver);
+
 const router = new VueRouter({
     mode: "history",
     routes,

@@ -25,7 +25,7 @@
                                         <div class="col-md-12">
                                             <ValidationProvider
                                                 name="Role Name"
-                                                rules="required"
+                                                rules="required|alpha"
                                                 v-slot="{ errors }"
                                             >
                                                 <div class="form-group">
@@ -39,10 +39,7 @@
                                                         id="role_name"
                                                         placeholder="Enter role name"
                                                     />
-                                                    <span
-                                                        class="invalid-feedback d-block"
-                                                        >{{ errors[0] }}</span
-                                                    >
+                                                    <span>{{ errors[0] }}</span>
                                                 </div>
                                             </ValidationProvider>
                                         </div>
@@ -62,15 +59,13 @@
                                                     <input
                                                         class="custom-control-input"
                                                         type="checkbox"
-                                                        v-model="
-                                                            item.title_value
-                                                        "
+                                                        v-model="item.title"
                                                         :id="'menu' + index"
                                                     />
                                                     <label
                                                         :for="'menu' + index"
                                                         class="custom-control-label"
-                                                        >{{ item.title }}</label
+                                                        >Menu Name</label
                                                     >
                                                 </div>
 
@@ -222,8 +217,7 @@ export default {
                 name: "",
                 menus: [
                     {
-                        title: "Users",
-                        title_value: "",
+                        title: "",
                         permission: [
                             {
                                 create: "",
@@ -234,8 +228,40 @@ export default {
                         ],
                     },
                     {
-                        title: "Services",
-                        title_value: "",
+                        title: "",
+                        permission: [
+                            {
+                                create: "",
+                                edit: "",
+                                update: "",
+                                delete: "",
+                            },
+                        ],
+                    },
+                    {
+                        title: "",
+                        permission: [
+                            {
+                                create: "",
+                                edit: "",
+                                update: "",
+                                delete: "",
+                            },
+                        ],
+                    },
+                    {
+                        title: "",
+                        permission: [
+                            {
+                                create: "",
+                                edit: "",
+                                update: "",
+                                delete: "",
+                            },
+                        ],
+                    },
+                    {
+                        title: "",
                         permission: [
                             {
                                 create: "",
@@ -250,7 +276,7 @@ export default {
         };
     },
     methods: {
-        onSubmit() {
+        storeRole() {
             axios
                 .post("/store-role-permission", this.rpData)
                 .then((res) => {
