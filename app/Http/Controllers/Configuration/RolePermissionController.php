@@ -36,18 +36,20 @@ class RolePermissionController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request['menus'];
         try {
-            DB::transaction();
+            DB::beginTransaction();
             $roleModels = Role::create($request->all());
             $manus = $request['menus'];
             foreach ($manus as $key => $value) {
-                $menu = Menu::create([
-                    'role_id'=> $roleModels->id,
-                    'menu_name'=> $value['title'],
-                    'm_id'=> $value['title_value']
-                ]);
-                $menu->create_permission($value['permission']);
+                if ($value['title_value']) {
+                    $menu = Menu::create([
+                        'role_id'=> $roleModels->id,
+                        'menu_name'=> $value['title'],
+                        'm_id'=> $value['title_value']
+                    ]);
+                    $menu->create_permission()->delete();
+                    $menu->create_permission()->createMany($value['permission']);
+                }
             }
 
             DB::commit();
@@ -57,8 +59,10 @@ class RolePermissionController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return response([
-                'msg'=> $th
-            ],500);
+                'success' => false,
+                'message' => 'Failed to save data.',
+                'errors'  => $th->getMessage()
+            ], 500);
         }
 
     }

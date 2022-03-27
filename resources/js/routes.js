@@ -1,6 +1,7 @@
 const Dashboard = () => import("./components/Dashboard.vue");
 const RolePermission = () =>
     import("./components/configuration/RolePermission.vue");
+const UserList = () => import("./components/configuration/UserList.vue");
 
 export default [
     {
@@ -12,5 +13,10 @@ export default [
         path: "/role-permission-list",
         name: "RolePermission",
         component: RolePermission,
+    },
+    {
+        path: "/user-list",
+        name: "UserList",
+        component: UserList,
     },
 ];

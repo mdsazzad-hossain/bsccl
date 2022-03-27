@@ -162,12 +162,12 @@
                         method: "POST",
                         data: $('#loginForm').serialize(),
                         success: function(res) {
-                            $('#loading').css('cssText', 'display: none !important');
+                            // $('#loading').css('cssText', 'display: none !important');
                             toastr.success('Login Successfull.')
                             window.location.href = '/dashboard';
                         },
                         error: function() {
-                            $('#loading').css('cssText', 'display: none !important');
+                            // $('#loading').css('cssText', 'display: none !important');
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Cridentials not match!'

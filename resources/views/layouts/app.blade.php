@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="assets/plugins/animate/animate.css">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <style>
-        .width {
-            min-width: 150px !important;
-        }
-
         .user-name {
             font-size: 20px;
         }

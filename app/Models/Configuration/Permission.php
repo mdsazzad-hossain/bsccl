@@ -13,7 +13,7 @@ class Permission extends Model
         'menu_id',
         'create',
         'edit',
-        'update',
-        'delete'
+        'delete',
+        'update'
     ];
 }

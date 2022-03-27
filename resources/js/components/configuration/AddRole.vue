@@ -18,6 +18,9 @@
                         <div class="overlay" id="loading">
                             <i class="fa fa-spinner fa-spin"></i>
                         </div>
+                        <div class="overlay" id="loading">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
                         <div class="card-body">
                             <ValidationObserver v-slot="{ handleSubmit }">
                                 <form @submit.prevent="handleSubmit(onSubmit)">
@@ -68,6 +71,7 @@
                                                             item.title_value
                                                         "
                                                         :id="'menu' + index"
+                                                        :value="index + 1"
                                                     />
                                                     <label
                                                         :for="'menu' + index"
@@ -253,17 +257,19 @@ export default {
     },
     methods: {
         onSubmit() {
+            $("#loading").css("cssText", "display: block !important");
             axios
                 .post("/store-role-permission", this.rpData)
                 .then((res) => {
-                    console.log(res);
+                    $("#loading").css("cssText", "display: none !important");
                     Toast.fire({
                         icon: "success",
-                        title: "Logout Successfull.",
+                        title: "Data Upload Successfull.",
                     });
                     // window.location.href = "/";
                 })
                 .catch(() => {
+                    $("#loading").css("cssText", "display: none !important");
                     Swal.fire({
                         icon: "warning",
                         title: "wrong creidentials!",
@@ -273,4 +279,18 @@ export default {
     },
 };
 </script>
-<style></style>
+<style scoped>
+.fa-spin {
+    font-size: 30px;
+    margin-top: 20% !important;
+    margin-left: 46%;
+}
+
+.card .overlay,
+.info-box .overlay,
+.overlay-wrapper .overlay,
+.small-box .overlay {
+    background-color: rgba(221, 221, 221, 0.7) !important;
+    display: none !important;
+}
+</style>

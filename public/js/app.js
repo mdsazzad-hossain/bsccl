@@ -2286,6 +2286,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   methods: {
@@ -5303,6 +5306,10 @@ var RolePermission = function RolePermission() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_configuration_RolePermission_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/configuration/RolePermission.vue */ "./resources/js/components/configuration/RolePermission.vue"));
 };
 
+var UserList = function UserList() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_configuration_UserList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/configuration/UserList.vue */ "./resources/js/components/configuration/UserList.vue"));
+};
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
   path: "/dashboard",
   name: "Dashboard",
@@ -5311,6 +5318,10 @@ var RolePermission = function RolePermission() {
   path: "/role-permission-list",
   name: "RolePermission",
   component: RolePermission
+}, {
+  path: "/user-list",
+  name: "UserList",
+  component: UserList
 }]);
 
 /***/ }),
@@ -67168,7 +67179,27 @@ var render = function () {
                     _vm._m(4),
                     _vm._v(" "),
                     _c("ul", { staticClass: "nav nav-treeview" }, [
-                      _vm._m(5),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: { name: "UserList" } },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "far fa-circle nav-icon",
+                              }),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Users")]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "li",
@@ -67194,9 +67225,9 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
-                  _vm._m(6),
+                  _vm._m(5),
                   _vm._v(" "),
-                  _vm._m(7),
+                  _vm._m(6),
                 ]
               ),
             ]),
@@ -67206,7 +67237,7 @@ var render = function () {
       _vm._v(" "),
       _c("router-view", { key: _vm.$route.fullPath }),
       _vm._v(" "),
-      _vm._m(8),
+      _vm._m(7),
     ],
     1
   )
@@ -67321,18 +67352,6 @@ var staticRenderFns = [
           "\n                                Configuration\n                                "
         ),
         _c("i", { staticClass: "right fas fa-angle-left" }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "far fa-circle nav-icon" }),
-        _vm._v(" "),
-        _c("p", [_vm._v("Users")]),
       ]),
     ])
   },
@@ -82888,7 +82907,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
