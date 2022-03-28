@@ -15,10 +15,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card card-primary">
-                        <div class="overlay" id="loading">
-                            <i class="fa fa-spinner fa-spin"></i>
-                        </div>
-                        <div class="overlay" id="loading">
+                        <div class="overlay" v-if="loading">
                             <i class="fa fa-spinner fa-spin"></i>
                         </div>
                         <div class="card-body">
@@ -224,6 +221,7 @@
 export default {
     data() {
         return {
+            loading: false,
             rpData: {
                 role_name: "",
                 menus: [
@@ -257,11 +255,11 @@ export default {
     },
     methods: {
         onSubmit() {
-            $("#loading").css("cssText", "display: block !important");
+            this.loading = true;
             axios
                 .post("/store-role-permission", this.rpData)
                 .then((res) => {
-                    $("#loading").css("cssText", "display: none !important");
+                    this.loading = false;
                     Toast.fire({
                         icon: "success",
                         title: "Data Upload Successfull.",
@@ -269,7 +267,7 @@ export default {
                     // window.location.href = "/";
                 })
                 .catch(() => {
-                    $("#loading").css("cssText", "display: none !important");
+                    this.loading = false;
                     Swal.fire({
                         icon: "warning",
                         title: "wrong creidentials!",

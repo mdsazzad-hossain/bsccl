@@ -11,10 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-//
-//
-//
 //
 //
 //
@@ -237,6 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      loading: false,
       rpData: {
         role_name: "",
         menus: [{
@@ -263,15 +260,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onSubmit: function onSubmit() {
-      $("#loading").css("cssText", "display: block !important");
+      var _this = this;
+
+      this.loading = true;
       axios.post("/store-role-permission", this.rpData).then(function (res) {
-        $("#loading").css("cssText", "display: none !important");
+        _this.loading = false;
         Toast.fire({
           icon: "success",
           title: "Data Upload Successfull."
         }); // window.location.href = "/";
       })["catch"](function () {
-        $("#loading").css("cssText", "display: none !important");
+        _this.loading = false;
         Swal.fire({
           icon: "warning",
           title: "wrong creidentials!"
@@ -347,12 +346,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     AddRole: _AddRole_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: {}
+  data: function data() {
+    return {
+      loading: false,
+      listData: []
+    };
+  },
+  created: function created() {
+    this.getRoleList();
+  },
+  methods: {
+    getRoleList: function getRoleList() {
+      var _this = this;
+
+      this.loading = true;
+      axios.get("/role-permission-list").then(function (response) {
+        _this.loading = false;
+        _this.listData = response.data.data;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -939,9 +997,11 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _c("div", { staticClass: "card card-primary" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2),
+              _vm.loading
+                ? _c("div", { staticClass: "overlay" }, [
+                    _c("i", { staticClass: "fa fa-spinner fa-spin" }),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "div",
@@ -1793,22 +1853,6 @@ var staticRenderFns = [
       ),
     ])
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "overlay", attrs: { id: "loading" } }, [
-      _c("i", { staticClass: "fa fa-spinner fa-spin" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "overlay", attrs: { id: "loading" } }, [
-      _c("i", { staticClass: "fa fa-spinner fa-spin" }),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -1837,7 +1881,62 @@ var render = function () {
     [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _vm.loading
+                  ? _c("div", { staticClass: "overlay" }, [
+                      _c("i", { staticClass: "fa fa-spinner fa-spin" }),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-striped",
+                      attrs: { id: "example1" },
+                    },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        [
+                          _vm.listData.length == 0
+                            ? _c("tr", { staticClass: "text-center" }, [
+                                _c("td", { attrs: { colspan: "2" } }),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Data Not Found")]),
+                                _vm._v(" "),
+                                _c("td", { attrs: { colspan: "2" } }),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.listData, function (item, index) {
+                            return _c("tr", { key: index }, [
+                              _c("td", [_vm._v(_vm._s(index + 1))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.role_name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.status))]),
+                              _vm._v(" "),
+                              _vm._m(2, true),
+                            ])
+                          }),
+                        ],
+                        2
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("add-role", { ref: "role-permission-modal" }),
     ],
@@ -1883,41 +1982,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped",
-                    attrs: { id: "example1" },
-                  },
-                  [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", [_vm._v("SL")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Role Name")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Menu Name")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Status")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Action")]),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody"),
-                  ]
-                ),
-              ]),
-            ]),
-          ]),
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("SL")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Role Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-sm",
+          attrs: { type: "button", title: "View Details" },
+        },
+        [_c("i", { staticClass: "fa fa-edit action-btn-font m-0" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-sm",
+          attrs: { type: "button", title: "Delete User" },
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-trash action-btn-font m-0",
+            attrs: { "aria-hidden": "true" },
+          }),
+        ]
+      ),
     ])
   },
 ]

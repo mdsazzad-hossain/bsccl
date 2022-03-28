@@ -314,6 +314,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      loading: false,
       visibleForm: false,
       user: {
         name: "",
@@ -333,7 +334,23 @@ __webpack_require__.r(__webpack_exports__);
     visibleAction: function visibleAction() {
       this.visibleForm = !this.visibleForm;
     },
-    onSubmit: function onSubmit() {}
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post("/store", this.user).then(function (res) {
+        _this.loading = false;
+        Toast.fire({
+          icon: "success",
+          title: "Data Upload Successfull."
+        }); // window.location.href = "/";
+      })["catch"](function () {
+        _this.loading = false;
+        Swal.fire({
+          icon: "warning",
+          title: "wrong creidentials!"
+        });
+      });
+    }
   }
 });
 
@@ -422,10 +439,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     UserAdd: _UserAdd_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      loading: false,
+      listData: []
+    };
+  },
+  created: function created() {
+    this.getUserList();
+  },
+  methods: {
+    getUserList: function getUserList() {
+      var _this = this;
+
+      this.loading = true;
+      axios.get("/get-user-list").then(function (response) {
+        _this.loading = false;
+        _this.listData = response.data.users;
+      });
+    }
   }
 });
 
@@ -1258,7 +1327,11 @@ var render = function () {
               "div",
               { staticClass: "card card-primary" },
               [
-                _vm._m(1),
+                _vm.loading
+                  ? _c("div", { staticClass: "overlay" }, [
+                      _c("i", { staticClass: "fa fa-spinner fa-spin" }),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm.visibleForm
                   ? _c(
@@ -2257,14 +2330,6 @@ var staticRenderFns = [
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "overlay", attrs: { id: "loading" } }, [
-      _c("i", { staticClass: "fa fa-spinner fa-spin" }),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -2290,7 +2355,80 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "content-wrapper" },
-    [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("user-add")],
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _vm.loading
+                  ? _c("div", { staticClass: "overlay" }, [
+                      _c("i", { staticClass: "fa fa-spinner fa-spin" }),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-striped",
+                      attrs: { id: "example1" },
+                    },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        [
+                          _vm.listData.length == 0
+                            ? _c("tr", { staticClass: "text-center" }, [
+                                _c("td", { attrs: { colspan: "3" } }),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Data Not Found")]),
+                                _vm._v(" "),
+                                _c("td", { attrs: { colspan: "3" } }),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.listData, function (item, index) {
+                            return _c("tr", { key: index }, [
+                              _c("td", [_vm._v(_vm._s(index + 1))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.email))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(
+                                      item.phone == 0 ? "Not Found" : item.phone
+                                    ) +
+                                    "\n                                        "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.address))]),
+                              _vm._v(" "),
+                              _vm._m(2, true),
+                            ])
+                          }),
+                        ],
+                        2
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("user-add"),
+    ],
     1
   )
 }
@@ -2333,43 +2471,49 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped",
-                    attrs: { id: "example1" },
-                  },
-                  [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", [_vm._v("SL")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Name")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Email")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Phone")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Address")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Action")]),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody"),
-                  ]
-                ),
-              ]),
-            ]),
-          ]),
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("SL")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Phone")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success btn-sm",
+          attrs: { type: "button", title: "View Details" },
+        },
+        [_c("i", { staticClass: "fa fa-edit action-btn-font m-0" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-sm",
+          attrs: { type: "button", title: "Delete User" },
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-trash action-btn-font m-0",
+            attrs: { "aria-hidden": "true" },
+          }),
+        ]
+      ),
     ])
   },
 ]

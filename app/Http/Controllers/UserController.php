@@ -11,10 +11,11 @@ class UserController extends Controller
     {
         $data = auth()->user();
         $model = User::where('role',3)->orderBy('id', 'DESC')->get();
-        return view('pages.user-module.user-list',[
-            'data'=>$data,
-            'users'=>$model
-        ]);
+        return response([
+            'msg'=> 'Success',
+            'data'=> $data,
+            'users'=> $model
+        ],200);
     }
 
     public function system_user()

@@ -2289,6 +2289,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   methods: {
@@ -5310,6 +5319,10 @@ var UserList = function UserList() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_configuration_UserList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/configuration/UserList.vue */ "./resources/js/components/configuration/UserList.vue"));
 };
 
+var ServiceList = function ServiceList() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_configuration_ServiceList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/configuration/ServiceList.vue */ "./resources/js/components/configuration/ServiceList.vue"));
+};
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
   path: "/dashboard",
   name: "Dashboard",
@@ -5322,6 +5335,13 @@ var UserList = function UserList() {
   path: "/user-list",
   name: "UserList",
   component: UserList
+}, {
+  path: "/services",
+  name: "ServiceList",
+  component: ServiceList
+}, {
+  path: "/*",
+  component: Dashboard
 }]);
 
 /***/ }),
@@ -67222,6 +67242,28 @@ var render = function () {
                         ],
                         1
                       ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: { name: "ServiceList" } },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "far fa-circle nav-icon",
+                              }),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Services")]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
                     ]),
                   ]),
                   _vm._v(" "),
@@ -67326,7 +67368,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "a",
-      { staticClass: "brand-link", attrs: { href: "index3.html" } },
+      { staticClass: "brand-link", attrs: { href: "/dashboard" } },
       [
         _c("img", {
           staticClass: "brand-image img-circle elevation-3",
@@ -67406,7 +67448,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Tariff\n                                "
+            "\n                                Services\n                                "
           ),
           _c("i", { staticClass: "right fas fa-angle-left" }),
         ]),
@@ -82907,7 +82949,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1,"resources_js_components_configuration_ServiceList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

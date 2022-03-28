@@ -93,7 +93,7 @@
             </ul>
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="index3.html" class="brand-link">
+            <a href="/dashboard" class="brand-link">
                 <img
                     width="100"
                     src="/assets/dist/img/logo.png"
@@ -149,6 +149,15 @@
                                         <p>Role & Permission</p>
                                     </router-link>
                                 </li>
+                                <li class="nav-item">
+                                    <router-link
+                                        :to="{ name: 'ServiceList' }"
+                                        class="nav-link"
+                                    >
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Services</p>
+                                    </router-link>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -181,7 +190,7 @@
                                     aria-hidden="true"
                                 ></i>
                                 <p>
-                                    Tariff
+                                    Services
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>

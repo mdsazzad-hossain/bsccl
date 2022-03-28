@@ -4,17 +4,17 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>User/Coustomer List</h1>
+                        <h1>Services List</h1>
                     </div>
                     <div class="col-md-6 text-right">
                         <button
                             type="button"
                             data-toggle="modal"
-                            data-target="#user-add-modal"
+                            data-target="#service-add-modal"
                             class="btn btn-outline-primary"
                         >
                             <i class="fa fa-plus mr-1"></i>
-                            Add New User
+                            Add New Service
                         </button>
                     </div>
                 </div>
@@ -38,9 +38,8 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
+                                            <th>Sub Service</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -59,16 +58,8 @@
                                         >
                                             <td>{{ index + 1 }}</td>
                                             <td>{{ item.name }}</td>
-                                            <td>{{ item.email }}</td>
-                                            <td>
-                                                {{
-                                                    item.phone == 0
-                                                        ? "Not Found"
-                                                        : item.phone
-                                                }}
-                                            </td>
-                                            <td>{{ item.address }}</td>
-
+                                            <td></td>
+                                            <td></td>
                                             <td>
                                                 <button
                                                     type="button"
@@ -99,14 +90,14 @@
                 </div>
             </div>
         </section>
-        <user-add />
+        <service-add />
     </div>
 </template>
 <script>
-import UserAdd from "./UserAdd.vue";
+import ServiceAdd from "./ServiceAdd.vue";
 export default {
     components: {
-        UserAdd,
+        ServiceAdd,
     },
     data() {
         return {
@@ -115,14 +106,14 @@ export default {
         };
     },
     created() {
-        this.getUserList();
+        this.getServiceList();
     },
     methods: {
-        getUserList() {
+        getServiceList() {
             this.loading = true;
-            axios.get("/get-user-list").then((response) => {
+            axios.get("/get-service-list").then((response) => {
                 this.loading = false;
-                this.listData = response.data.users;
+                this.listData = [];
             });
         },
     },

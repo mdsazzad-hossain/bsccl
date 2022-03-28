@@ -26,6 +26,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            <div class="overlay" v-if="loading">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
                             <div class="card-body">
                                 <table
                                     id="example1"
@@ -35,12 +38,49 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Role Name</th>
-                                            <th>Menu Name</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody>
+                                        <tr
+                                            v-if="listData.length == 0"
+                                            class="text-center"
+                                        >
+                                            <td colspan="2"></td>
+                                            <span>Data Not Found</span>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr
+                                            v-for="(item, index) in listData"
+                                            :key="index"
+                                        >
+                                            <td>{{ index + 1 }}</td>
+                                            <td>{{ item.role_name }}</td>
+                                            <td>{{ item.status }}</td>
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    title="View Details"
+                                                    class="btn btn-success btn-sm"
+                                                >
+                                                    <i
+                                                        class="fa fa-edit action-btn-font m-0"
+                                                    ></i>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    title="Delete User"
+                                                    class="btn btn-danger btn-sm"
+                                                >
+                                                    <i
+                                                        class="fa fa-trash action-btn-font m-0"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -57,7 +97,24 @@ export default {
     components: {
         AddRole,
     },
-    methods: {},
+    data() {
+        return {
+            loading: false,
+            listData: [],
+        };
+    },
+    created() {
+        this.getRoleList();
+    },
+    methods: {
+        getRoleList() {
+            this.loading = true;
+            axios.get("/role-permission-list").then((response) => {
+                this.loading = false;
+                this.listData = response.data.data;
+            });
+        },
+    },
 };
 </script>
 <style lang=""></style>

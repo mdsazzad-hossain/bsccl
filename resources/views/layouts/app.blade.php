@@ -14,8 +14,8 @@
 
         .fa-spin {
             font-size: 30px;
-            margin-top: 50% !important;
-            margin-left: 46%;
+            /* margin-top: 50% !important;
+            margin-left: 46%; */
         }
 
         .card .overlay,
@@ -23,7 +23,7 @@
         .overlay-wrapper .overlay,
         .small-box .overlay {
             background-color: rgba(221, 221, 221, .7) !important;
-            display: none !important;
+            /* display: block !important; */
         }
 
         .btn-group-sm>.btn,

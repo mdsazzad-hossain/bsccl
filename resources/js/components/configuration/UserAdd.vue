@@ -27,7 +27,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card card-primary">
-                        <div class="overlay" id="loading">
+                        <div class="overlay" v-if="loading">
                             <i class="fa fa-spinner fa-spin"></i>
                         </div>
                         <div class="card-body" v-if="visibleForm">
@@ -248,6 +248,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             visibleForm: false,
             user: {
                 name: "",
@@ -267,7 +268,25 @@ export default {
         visibleAction() {
             this.visibleForm = !this.visibleForm;
         },
-        onSubmit() {},
+        onSubmit() {
+            axios
+                .post("/store", this.user)
+                .then((res) => {
+                    this.loading = false;
+                    Toast.fire({
+                        icon: "success",
+                        title: "Data Upload Successfull.",
+                    });
+                    // window.location.href = "/";
+                })
+                .catch(() => {
+                    this.loading = false;
+                    Swal.fire({
+                        icon: "warning",
+                        title: "wrong creidentials!",
+                    });
+                });
+        },
     },
 };
 </script>
