@@ -132,15 +132,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       loading: false,
       service: {
-        name: ""
+        service: ""
       },
       sub_service: [{
-        child_name: ""
+        sub_service: ""
       }]
     };
   },
@@ -149,6 +151,7 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this = this;
 
+      this.loading = true;
       axios.post("/service-store", {
         service: this.service,
         sub_service: this.sub_service
@@ -168,7 +171,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addItem: function addItem() {
       this.sub_service.push({
-        child_name: ""
+        sub_service: ""
       });
     },
     removeItem: function removeItem(i) {
@@ -554,9 +557,9 @@ var render = function () {
                                                                 "v-model",
                                                               value:
                                                                 _vm.service
-                                                                  .name,
+                                                                  .service,
                                                               expression:
-                                                                "service.name",
+                                                                "\n                                                        service.service\n                                                    ",
                                                             },
                                                           ],
                                                           staticClass:
@@ -569,7 +572,8 @@ var render = function () {
                                                           },
                                                           domProps: {
                                                             value:
-                                                              _vm.service.name,
+                                                              _vm.service
+                                                                .service,
                                                           },
                                                           on: {
                                                             input: function (
@@ -583,7 +587,7 @@ var render = function () {
                                                               }
                                                               _vm.$set(
                                                                 _vm.service,
-                                                                "name",
+                                                                "service",
                                                                 $event.target
                                                                   .value
                                                               )
@@ -654,9 +658,9 @@ var render = function () {
                                                       {
                                                         name: "model",
                                                         rawName: "v-model",
-                                                        value: item.child_name,
+                                                        value: item.sub_service,
                                                         expression:
-                                                          "\n                                                        item.child_name\n                                                    ",
+                                                          "\n                                                        item.sub_service\n                                                    ",
                                                       },
                                                     ],
                                                     staticClass: "form-control",
@@ -667,7 +671,7 @@ var render = function () {
                                                         "Sub Service Name",
                                                     },
                                                     domProps: {
-                                                      value: item.child_name,
+                                                      value: item.sub_service,
                                                     },
                                                     on: {
                                                       input: function ($event) {
@@ -679,7 +683,7 @@ var render = function () {
                                                         }
                                                         _vm.$set(
                                                           item,
-                                                          "child_name",
+                                                          "sub_service",
                                                           $event.target.value
                                                         )
                                                       },
@@ -872,7 +876,7 @@ var render = function () {
                             return _c("tr", { key: index }, [
                               _c("td", [_vm._v(_vm._s(index + 1))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.name))]),
+                              _c("td", [_vm._v(_vm._s(item.service))]),
                               _vm._v(" "),
                               _c("td"),
                               _vm._v(" "),
@@ -941,7 +945,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("SL")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
+        _c("th", [_vm._v("Service Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Sub Service")]),
         _vm._v(" "),

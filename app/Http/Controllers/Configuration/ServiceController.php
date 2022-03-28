@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Configuration;
 use App\Http\Controllers\Controller;
 use App\Models\Configuration\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -35,14 +36,22 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
-        $model = Service::create($request->all());
-        $model->create_sub_service()->delete();
-        $model->create_sub_service()->createMany($request['sub_service']);
+        try {
+            DB::beginTransaction();
+            $model = Service::create($request->service);
+            $model->create_sub_service()->delete();
+            $model->create_sub_service()->createMany($request->sub_service);
 
-        return response([
-            'msg'=> 'Success',
-        ], 200);
+            DB::commit();
+            return response([
+                'msg'=> 'Success',
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response([
+                'msg'=> 'ERROR',
+            ], 500);
+        }
     }
 
     /**

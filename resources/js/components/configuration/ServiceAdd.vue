@@ -34,7 +34,9 @@
                                                     >
                                                     <input
                                                         type="text"
-                                                        v-model="service.name"
+                                                        v-model="
+                                                            service.service
+                                                        "
                                                         class="form-control"
                                                         id="name"
                                                         placeholder="Enter name"
@@ -65,7 +67,7 @@
                                                     <input
                                                         type="text"
                                                         v-model="
-                                                            item.child_name
+                                                            item.sub_service
                                                         "
                                                         class="form-control"
                                                         :id="'Sub_Service' + i"
@@ -125,11 +127,11 @@ export default {
         return {
             loading: false,
             service: {
-                name: "",
+                service: "",
             },
             sub_service: [
                 {
-                    child_name: "",
+                    sub_service: "",
                 },
             ],
         };
@@ -137,6 +139,7 @@ export default {
     created() {},
     methods: {
         onSubmit() {
+            this.loading = true;
             axios
                 .post("/service-store", {
                     service: this.service,
@@ -160,7 +163,7 @@ export default {
         },
         addItem() {
             this.sub_service.push({
-                child_name: "",
+                sub_service: "",
             });
         },
         removeItem(i) {

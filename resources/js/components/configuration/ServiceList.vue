@@ -37,7 +37,7 @@
                                     <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Name</th>
+                                            <th>Service Name</th>
                                             <th>Sub Service</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -57,7 +57,7 @@
                                             :key="index"
                                         >
                                             <td>{{ index + 1 }}</td>
-                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.service }}</td>
                                             <td></td>
                                             <td></td>
                                             <td>
