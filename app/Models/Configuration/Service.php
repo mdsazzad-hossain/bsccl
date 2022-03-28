@@ -12,4 +12,14 @@ class Service extends Model
     protected $fillable = [
         'service'
     ];
+
+    public function sub_services()
+    {
+        return $this->hasMany(SubService::class, 'service_id', 'id');
+    }
+
+    public function create_sub_services()
+    {
+        return $this->hasMany(SubService::class, 'service_id', 'id');
+    }
 }
