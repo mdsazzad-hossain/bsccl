@@ -6,6 +6,7 @@ use App\Http\Controllers\Configuration\RolePermissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileImportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Configuration\ServiceController;
 
 /*
 |--------------------------------------------------------------------------

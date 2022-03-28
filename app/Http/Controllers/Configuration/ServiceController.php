@@ -35,6 +35,7 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->all();
         $model = Service::create($request->all());
         $model->create_sub_service()->delete();
         $model->create_sub_service()->createMany($request['sub_service']);

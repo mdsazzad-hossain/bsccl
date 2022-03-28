@@ -57,33 +57,21 @@
                                                     margin-left: -7px !important;
                                                 "
                                             >
-                                                <ValidationProvider
-                                                    name="Sub Service Name"
-                                                    rules="required"
-                                                    v-slot="{ errors }"
-                                                >
-                                                    <div class="form-group">
-                                                        <label for="sub"
-                                                            >Sub Service
-                                                            Name</label
-                                                        >
-                                                        <input
-                                                            type="text"
-                                                            v-model="
-                                                                item.child_name
-                                                            "
-                                                            class="form-control"
-                                                            id="sub"
-                                                            placeholder="Sub Service Name"
-                                                        />
-                                                        <span
-                                                            class="invalid-feedback d-block"
-                                                            >{{
-                                                                errors[0]
-                                                            }}</span
-                                                        >
-                                                    </div>
-                                                </ValidationProvider>
+                                                <div class="form-group">
+                                                    <label
+                                                        :for="'Sub Service' + i"
+                                                        >Sub Service Name</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        v-model="
+                                                            item.child_name
+                                                        "
+                                                        class="form-control"
+                                                        :id="'Sub_Service' + i"
+                                                        placeholder="Sub Service Name"
+                                                    />
+                                                </div>
                                             </div>
                                             <div
                                                 class="col-md-1"
@@ -138,7 +126,6 @@ export default {
             loading: false,
             service: {
                 name: "",
-                child: [],
             },
             sub_service: [
                 {
@@ -150,23 +137,26 @@ export default {
     created() {},
     methods: {
         onSubmit() {
-            // axios
-            //     .post("/store", this.user)
-            //     .then((res) => {
-            //         this.loading = false;
-            //         Toast.fire({
-            //             icon: "success",
-            //             title: "Data Upload Successfull.",
-            //         });
-            //         // window.location.href = "/";
-            //     })
-            //     .catch(() => {
-            //         this.loading = false;
-            //         Swal.fire({
-            //             icon: "warning",
-            //             title: "wrong creidentials!",
-            //         });
-            //     });
+            axios
+                .post("/service-store", {
+                    service: this.service,
+                    sub_service: this.sub_service,
+                })
+                .then((res) => {
+                    this.loading = false;
+                    Toast.fire({
+                        icon: "success",
+                        title: "Data Upload Successfull.",
+                    });
+                    // window.location.href = "/";
+                })
+                .catch(() => {
+                    this.loading = false;
+                    Swal.fire({
+                        icon: "warning",
+                        title: "wrong creidentials!",
+                    });
+                });
         },
         addItem() {
             this.sub_service.push({

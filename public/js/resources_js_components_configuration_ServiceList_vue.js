@@ -132,25 +132,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       loading: false,
       service: {
-        name: "",
-        child: []
+        name: ""
       },
       sub_service: [{
         child_name: ""
@@ -159,23 +146,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   methods: {
-    onSubmit: function onSubmit() {// axios
-      //     .post("/store", this.user)
-      //     .then((res) => {
-      //         this.loading = false;
-      //         Toast.fire({
-      //             icon: "success",
-      //             title: "Data Upload Successfull.",
-      //         });
-      //         // window.location.href = "/";
-      //     })
-      //     .catch(() => {
-      //         this.loading = false;
-      //         Swal.fire({
-      //             icon: "warning",
-      //             title: "wrong creidentials!",
-      //         });
-      //     });
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post("/service-store", {
+        service: this.service,
+        sub_service: this.sub_service
+      }).then(function (res) {
+        _this.loading = false;
+        Toast.fire({
+          icon: "success",
+          title: "Data Upload Successfull."
+        }); // window.location.href = "/";
+      })["catch"](function () {
+        _this.loading = false;
+        Swal.fire({
+          icon: "warning",
+          title: "wrong creidentials!"
+        });
+      });
     },
     addItem: function addItem() {
       this.sub_service.push({
@@ -315,9 +304,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.get("/get-service-list").then(function (response) {
+      axios.get("/service-list").then(function (response) {
         _this.loading = false;
-        _this.listData = [];
+        _this.listData = response.data.data;
       });
     }
   }
@@ -646,112 +635,59 @@ var render = function () {
                                               },
                                             },
                                             [
-                                              _c("ValidationProvider", {
-                                                attrs: {
-                                                  name: "Sub Service Name",
-                                                  rules: "required",
-                                                },
-                                                scopedSlots: _vm._u(
-                                                  [
+                                              _c(
+                                                "div",
+                                                { staticClass: "form-group" },
+                                                [
+                                                  _c(
+                                                    "label",
                                                     {
-                                                      key: "default",
-                                                      fn: function (ref) {
-                                                        var errors = ref.errors
-                                                        return [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "form-group",
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "label",
-                                                                {
-                                                                  attrs: {
-                                                                    for: "sub",
-                                                                  },
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "Sub Service\n                                                        Name"
-                                                                  ),
-                                                                ]
-                                                              ),
-                                                              _vm._v(" "),
-                                                              _c("input", {
-                                                                directives: [
-                                                                  {
-                                                                    name: "model",
-                                                                    rawName:
-                                                                      "v-model",
-                                                                    value:
-                                                                      item.child_name,
-                                                                    expression:
-                                                                      "\n                                                            item.child_name\n                                                        ",
-                                                                  },
-                                                                ],
-                                                                staticClass:
-                                                                  "form-control",
-                                                                attrs: {
-                                                                  type: "text",
-                                                                  id: "sub",
-                                                                  placeholder:
-                                                                    "Sub Service Name",
-                                                                },
-                                                                domProps: {
-                                                                  value:
-                                                                    item.child_name,
-                                                                },
-                                                                on: {
-                                                                  input:
-                                                                    function (
-                                                                      $event
-                                                                    ) {
-                                                                      if (
-                                                                        $event
-                                                                          .target
-                                                                          .composing
-                                                                      ) {
-                                                                        return
-                                                                      }
-                                                                      _vm.$set(
-                                                                        item,
-                                                                        "child_name",
-                                                                        $event
-                                                                          .target
-                                                                          .value
-                                                                      )
-                                                                    },
-                                                                },
-                                                              }),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "span",
-                                                                {
-                                                                  staticClass:
-                                                                    "invalid-feedback d-block",
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    _vm._s(
-                                                                      errors[0]
-                                                                    )
-                                                                  ),
-                                                                ]
-                                                              ),
-                                                            ]
-                                                          ),
-                                                        ]
+                                                      attrs: {
+                                                        for: "Sub Service" + i,
                                                       },
                                                     },
-                                                  ],
-                                                  null,
-                                                  true
-                                                ),
-                                              }),
-                                            ],
-                                            1
+                                                    [_vm._v("Sub Service Name")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: item.child_name,
+                                                        expression:
+                                                          "\n                                                        item.child_name\n                                                    ",
+                                                      },
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    attrs: {
+                                                      type: "text",
+                                                      id: "Sub_Service" + i,
+                                                      placeholder:
+                                                        "Sub Service Name",
+                                                    },
+                                                    domProps: {
+                                                      value: item.child_name,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          item,
+                                                          "child_name",
+                                                          $event.target.value
+                                                        )
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                            ]
                                           ),
                                           _vm._v(" "),
                                           _c(
@@ -924,11 +860,11 @@ var render = function () {
                         [
                           _vm.listData.length == 0
                             ? _c("tr", { staticClass: "text-center" }, [
-                                _c("td", { attrs: { colspan: "3" } }),
+                                _c("td", { attrs: { colspan: "2" } }),
                                 _vm._v(" "),
                                 _c("span", [_vm._v("Data Not Found")]),
                                 _vm._v(" "),
-                                _c("td", { attrs: { colspan: "3" } }),
+                                _c("td", { attrs: { colspan: "2" } }),
                               ])
                             : _vm._e(),
                           _vm._v(" "),

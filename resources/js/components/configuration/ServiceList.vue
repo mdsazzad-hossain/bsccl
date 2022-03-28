@@ -48,9 +48,9 @@
                                             v-if="listData.length == 0"
                                             class="text-center"
                                         >
-                                            <td colspan="3"></td>
+                                            <td colspan="2"></td>
                                             <span>Data Not Found</span>
-                                            <td colspan="3"></td>
+                                            <td colspan="2"></td>
                                         </tr>
                                         <tr
                                             v-for="(item, index) in listData"
@@ -111,9 +111,9 @@ export default {
     methods: {
         getServiceList() {
             this.loading = true;
-            axios.get("/get-service-list").then((response) => {
+            axios.get("/service-list").then((response) => {
                 this.loading = false;
-                this.listData = [];
+                this.listData = response.data.data;
             });
         },
     },
