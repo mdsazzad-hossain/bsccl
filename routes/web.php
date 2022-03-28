@@ -48,5 +48,9 @@ Route::group(['middleware' => ['auth','user.role']], function () {
     //Role & Permission
     Route::get('/role-permission-list', [RolePermissionController::class, 'index'])->name('role.permission.list');
     Route::post('/store-role-permission', [RolePermissionController::class, 'store'])->name('role.permission.store');
+
+    //Services Routes
+    Route::get('/service-list', [ServiceController::class, 'index'])->name('service.list');
+    Route::post('/service-store', [ServiceController::class, 'store'])->name('service.store');
 });
 
