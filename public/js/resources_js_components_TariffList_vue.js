@@ -1621,26 +1621,6 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("h1", [_vm._v("Tariff IPLC List")]),
           ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 text-right" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#capacity-add-modal",
-                },
-              },
-              [
-                _c("i", { staticClass: "fa fa-plus mr-1" }),
-                _vm._v(
-                  "\n                        Add New Capacity\n                    "
-                ),
-              ]
-            ),
-          ]),
         ]),
       ]),
     ])

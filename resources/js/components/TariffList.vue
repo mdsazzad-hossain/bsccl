@@ -6,7 +6,7 @@
                     <div class="col-sm-6">
                         <h1>Tariff IPLC List</h1>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <!-- <div class="col-md-6 text-right">
                         <button
                             type="button"
                             data-toggle="modal"
@@ -16,7 +16,7 @@
                             <i class="fa fa-plus mr-1"></i>
                             Add New Capacity
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
