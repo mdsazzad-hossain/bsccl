@@ -2298,6 +2298,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   methods: {
@@ -5240,7 +5243,7 @@ window.Toast = Toast; //vee-validator
 Vue.component("ValidationProvider", vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_3__.ValidationProvider);
 Vue.component("ValidationObserver", vee_validate__WEBPACK_IMPORTED_MODULE_4__.ValidationObserver);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  mode: "history",
+  mode: "hash",
   routes: _routes__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 new Vue({
@@ -5323,8 +5326,13 @@ var ServiceList = function ServiceList() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_configuration_ServiceList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/configuration/ServiceList.vue */ "./resources/js/components/configuration/ServiceList.vue"));
 };
 
+var TariffList = function TariffList() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_TariffList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/TariffList.vue */ "./resources/js/components/TariffList.vue"));
+};
+
+var path = "d3cfdb7594b592d36a0179aaa03c3480";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
-  path: "/dashboard",
+  path: path + "/dashboard",
   name: "Dashboard",
   component: Dashboard
 }, {
@@ -5339,6 +5347,10 @@ var ServiceList = function ServiceList() {
   path: "/services",
   name: "ServiceList",
   component: ServiceList
+}, {
+  path: "/tariff-list",
+  name: "TariffList",
+  component: TariffList
 }, {
   path: "/*",
   component: Dashboard
@@ -67269,7 +67281,37 @@ var render = function () {
                   _vm._v(" "),
                   _vm._m(5),
                   _vm._v(" "),
-                  _vm._m(6),
+                  _c("li", { staticClass: "nav-item" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("ul", { staticClass: "nav nav-treeview" }, [
+                      _c(
+                        "li",
+                        { staticClass: "nav-item" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: { name: "TariffList" } },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "far fa-circle nav-icon",
+                              }),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("IPLC")]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _vm._m(8),
+                    ]),
+                  ]),
                 ]
               ),
             ]),
@@ -67279,7 +67321,7 @@ var render = function () {
       _vm._v(" "),
       _c("router-view", { key: _vm.$route.fullPath }),
       _vm._v(" "),
-      _vm._m(7),
+      _vm._m(9),
     ],
     1
   )
@@ -67368,7 +67410,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "a",
-      { staticClass: "brand-link", attrs: { href: "/dashboard" } },
+      {
+        staticClass: "brand-link",
+        attrs: { href: "/d3cfdb7594b592d36a0179aaa03c3480" },
+      },
       [
         _c("img", {
           staticClass: "brand-image img-circle elevation-3",
@@ -67439,45 +67484,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "fa fa-text-width",
+        attrs: { "aria-hidden": "true" },
+      }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n                                Services\n                                "
+        ),
+        _c("i", { staticClass: "right fas fa-angle-left" }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("li", { staticClass: "nav-item" }, [
       _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _c("i", {
-          staticClass: "fa fa-text-width",
-          attrs: { "aria-hidden": "true" },
-        }),
+        _c("i", { staticClass: "far fa-circle nav-icon" }),
         _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                                Services\n                                "
-          ),
-          _c("i", { staticClass: "right fas fa-angle-left" }),
-        ]),
+        _c("p", [_vm._v("IP Transit")]),
       ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav nav-treeview" }, [
-        _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-circle nav-icon" }),
-            _vm._v(" "),
-            _c("p", [_vm._v("IPLC")]),
-          ]),
-        ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "far fa-circle nav-icon" }),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-circle nav-icon" }),
-            _vm._v(" "),
-            _c("p", [_vm._v("IP Transit")]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-circle nav-icon" }),
-            _vm._v(" "),
-            _c("p", [_vm._v("Colocation Service")]),
-          ]),
-        ]),
+        _c("p", [_vm._v("Colocation Service")]),
       ]),
     ])
   },
@@ -82949,7 +82990,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1,"resources_js_components_configuration_ServiceList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1,"resources_js_components_configuration_ServiceList_vue":1,"resources_js_components_TariffList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

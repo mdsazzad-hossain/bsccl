@@ -11,6 +11,90 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -135,43 +219,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ["item"],
   data: function data() {
     return {
       loading: false,
       service: {
+        id: "",
         service: ""
       },
       sub_service: [{
-        sub_service: ""
+        sub_service: "",
+        capacity: [{
+          capacity_name: ""
+        }]
       }]
     };
   },
-  created: function created() {},
+  created: function created() {
+    this.getData();
+  },
   methods: {
+    getData: function getData() {
+      if (this.item) {
+        this.service.id = this.item.id;
+        this.service.service = this.item.service;
+        this.sub_service = this.item.sub_services;
+        console.log(this.sub_service);
+      }
+    },
     onSubmit: function onSubmit() {
       var _this = this;
 
       this.loading = true;
-      axios.post("/service-store", {
-        service: this.service,
+      axios.post("/service-store", _objectSpread(_objectSpread({}, this.service), {}, {
         sub_service: this.sub_service
-      }).then(function (res) {
+      })).then(function (res) {
         _this.loading = false;
         Toast.fire({
           icon: "success",
           title: "Data Upload Successfull."
-        }); // window.location.href = "/";
+        });
+
+        _this.$emit("executeMethod");
+
+        $("#service-add-modal").modal("hide");
       })["catch"](function () {
         _this.loading = false;
         Swal.fire({
           icon: "warning",
           title: "wrong creidentials!"
         });
+        $("#service-add-modal").modal("hide");
       });
+    },
+    addCapItem: function addCapItem(i) {
+      this.sub_service[i].capacity.push({
+        capacity_name: ""
+      });
+    },
+    removeCapItem: function removeCapItem(i, cap) {
+      this.sub_service[i].capacity.splice(cap, 1);
     },
     addItem: function addItem() {
       this.sub_service.push({
-        sub_service: ""
+        service: "",
+        capacity: [{
+          capacity_name: ""
+        }]
       });
     },
     removeItem: function removeItem(i) {
@@ -193,6 +307,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ServiceAdd_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ServiceAdd.vue */ "./resources/js/components/configuration/ServiceAdd.vue");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -296,6 +437,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loading: false,
+      visibleModal: false,
+      editItem: "",
       listData: []
     };
   },
@@ -310,6 +453,33 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/service-list").then(function (response) {
         _this.loading = false;
         _this.listData = response.data.data;
+      });
+    },
+    edit: function edit(item) {
+      this.editItem = item;
+      this.visibleModal = true;
+      $("#service-add-modal").modal("show");
+    },
+    deleteItem: function deleteItem(item) {
+      var _this2 = this;
+
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.post("/change-service-status", {
+            id: item.id
+          }).then(function (response) {
+            _this2.getServiceList();
+
+            Swal.fire("Deleted!", "Service has been deleted.", "success");
+          });
+        }
       });
     }
   }
@@ -626,109 +796,302 @@ var render = function () {
                                         "div",
                                         {
                                           key: i,
-                                          staticClass: "col-md-12 d-flex",
+                                          staticClass: "col-md-12 mb-1",
                                         },
                                         [
                                           _c(
                                             "div",
                                             {
-                                              staticClass: "col-md-11",
-                                              staticStyle: {
-                                                "margin-left":
-                                                  "-7px !important",
-                                              },
+                                              staticClass:
+                                                "border border-dar p-1",
                                             },
                                             [
                                               _c(
                                                 "div",
-                                                { staticClass: "form-group" },
+                                                { staticClass: "col-md-12" },
                                                 [
                                                   _c(
-                                                    "label",
+                                                    "div",
                                                     {
-                                                      attrs: {
-                                                        for: "Sub Service" + i,
-                                                      },
-                                                    },
-                                                    [_vm._v("Sub Service Name")]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c("input", {
-                                                    directives: [
-                                                      {
-                                                        name: "model",
-                                                        rawName: "v-model",
-                                                        value: item.sub_service,
-                                                        expression:
-                                                          "\n                                                        item.sub_service\n                                                    ",
-                                                      },
-                                                    ],
-                                                    staticClass: "form-control",
-                                                    attrs: {
-                                                      type: "text",
-                                                      id: "Sub_Service" + i,
-                                                      placeholder:
-                                                        "Sub Service Name",
-                                                    },
-                                                    domProps: {
-                                                      value: item.sub_service,
-                                                    },
-                                                    on: {
-                                                      input: function ($event) {
-                                                        if (
-                                                          $event.target
-                                                            .composing
-                                                        ) {
-                                                          return
-                                                        }
-                                                        _vm.$set(
-                                                          item,
-                                                          "sub_service",
-                                                          $event.target.value
-                                                        )
-                                                      },
-                                                    },
-                                                  }),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass: "col-md-1",
-                                              staticStyle: {
-                                                "margin-top": "5%",
-                                              },
-                                            },
-                                            [
-                                              _vm.sub_service.length - 1 === i
-                                                ? _c(
-                                                    "button",
-                                                    {
-                                                      staticClass:
-                                                        "btn btn-success btn-sm",
-                                                      attrs: { type: "button" },
-                                                      on: {
-                                                        click: _vm.addItem,
-                                                      },
+                                                      staticClass: "form-group",
                                                     },
                                                     [
-                                                      _c("i", {
+                                                      _c(
+                                                        "label",
+                                                        {
+                                                          attrs: {
+                                                            for:
+                                                              "Sub Service" + i,
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Sub Service\n                                                        Name"
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              item.sub_service,
+                                                            expression:
+                                                              "\n                                                            item.sub_service\n                                                        ",
+                                                          },
+                                                        ],
                                                         staticClass:
-                                                          "fa fa-plus",
+                                                          "form-control",
+                                                        attrs: {
+                                                          type: "text",
+                                                          id: "Sub_Service" + i,
+                                                          placeholder:
+                                                            "Sub Service Name",
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            item.sub_service,
+                                                        },
+                                                        on: {
+                                                          input: function (
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              item,
+                                                              "sub_service",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          },
+                                                        },
                                                       }),
                                                     ]
-                                                  )
-                                                : _vm._e(),
+                                                  ),
+                                                ]
+                                              ),
                                               _vm._v(" "),
-                                              _vm.sub_service.length > 1
-                                                ? _c(
+                                              _vm._l(
+                                                item.capacity,
+                                                function (capacity, capIndex) {
+                                                  return _c(
+                                                    "div",
+                                                    {
+                                                      key: capIndex,
+                                                      staticClass:
+                                                        "col-md-12 d-flex",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-10",
+                                                          staticStyle: {
+                                                            "margin-left":
+                                                              "-7px !important",
+                                                          },
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "form-group",
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  attrs: {
+                                                                    for:
+                                                                      "capacity" +
+                                                                      capIndex,
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Capacity\n                                                            Name"
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      capacity.capacity_name,
+                                                                    expression:
+                                                                      "\n                                                                capacity.capacity_name\n                                                            ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                attrs: {
+                                                                  type: "text",
+                                                                  id:
+                                                                    "capacity" +
+                                                                    capIndex,
+                                                                  placeholder:
+                                                                    "Capacity Name",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    capacity.capacity_name,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        capacity,
+                                                                        "capacity_name",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-md-2",
+                                                          staticStyle: {
+                                                            "margin-top": "5%",
+                                                          },
+                                                        },
+                                                        [
+                                                          item.capacity.length -
+                                                            1 ===
+                                                          capIndex
+                                                            ? _c(
+                                                                "button",
+                                                                {
+                                                                  staticClass:
+                                                                    "btn btn-success btn-sm",
+                                                                  attrs: {
+                                                                    type: "button",
+                                                                  },
+                                                                  on: {
+                                                                    click:
+                                                                      function (
+                                                                        $event
+                                                                      ) {
+                                                                        return _vm.addCapItem(
+                                                                          i
+                                                                        )
+                                                                      },
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _c("i", {
+                                                                    staticClass:
+                                                                      "fa fa-plus",
+                                                                  }),
+                                                                ]
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "button",
+                                                            {
+                                                              staticClass:
+                                                                "btn btn-danger btn-sm",
+                                                              attrs: {
+                                                                type: "button",
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.removeCapItem(
+                                                                      i,
+                                                                      capIndex
+                                                                    )
+                                                                  },
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("i", {
+                                                                staticClass:
+                                                                  "fa fa-times",
+                                                              }),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ]
+                                                  )
+                                                }
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "text-right p-3",
+                                                },
+                                                [
+                                                  _vm.sub_service.length - 1 ===
+                                                  i
+                                                    ? _c(
+                                                        "button",
+                                                        {
+                                                          staticClass:
+                                                            "btn btn-success",
+                                                          attrs: {
+                                                            type: "button",
+                                                          },
+                                                          on: {
+                                                            click: function (
+                                                              $event
+                                                            ) {
+                                                              return _vm.addItem()
+                                                            },
+                                                          },
+                                                        },
+                                                        [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fa fa-plus mr-1",
+                                                          }),
+                                                          _vm._v(
+                                                            "\n                                                    Add More\n                                                "
+                                                          ),
+                                                        ]
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  _c(
                                                     "button",
                                                     {
                                                       staticClass:
-                                                        "btn btn-danger btn-sm",
+                                                        "btn btn-danger",
                                                       attrs: { type: "button" },
                                                       on: {
                                                         click: function (
@@ -743,12 +1106,17 @@ var render = function () {
                                                     [
                                                       _c("i", {
                                                         staticClass:
-                                                          "fa fa-times",
+                                                          "fa fa-times mr-1",
                                                       }),
+                                                      _vm._v(
+                                                        "Remove\n                                                "
+                                                      ),
                                                     ]
-                                                  )
-                                                : _vm._e(),
-                                            ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ],
+                                            2
                                           ),
                                         ]
                                       )
@@ -757,7 +1125,7 @@ var render = function () {
                                   2
                                 ),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "text-right" }, [
+                                _c("div", { staticClass: "text-right mt-2" }, [
                                   _c(
                                     "button",
                                     {
@@ -836,7 +1204,34 @@ var render = function () {
     "div",
     { staticClass: "content-wrapper" },
     [
-      _vm._m(0),
+      _c("section", { staticClass: "content-header" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mb-2" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.edit()
+                    },
+                  },
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus mr-1" }),
+                  _vm._v(
+                    "\n                        Add New Service\n                    "
+                  ),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
@@ -878,11 +1273,78 @@ var render = function () {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(item.service))]),
                               _vm._v(" "),
-                              _c("td"),
+                              _c(
+                                "td",
+                                _vm._l(item.sub_services, function (sub, i) {
+                                  return _c(
+                                    "span",
+                                    {
+                                      key: i,
+                                      staticClass: "badge badge-primary mr-1",
+                                    },
+                                    [_vm._v(_vm._s(sub.sub_service))]
+                                  )
+                                }),
+                                0
+                              ),
                               _vm._v(" "),
-                              _c("td"),
+                              _c("td", [
+                                item.status == 1
+                                  ? _c(
+                                      "span",
+                                      { staticClass: "badge badge-success" },
+                                      [_vm._v("Active")]
+                                    )
+                                  : _c(
+                                      "span",
+                                      { staticClass: "badge badge-danger" },
+                                      [_vm._v("Inactive")]
+                                    ),
+                              ]),
                               _vm._v(" "),
-                              _vm._m(2, true),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: { type: "button", title: "Edit" },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.edit(item)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "fa fa-edit action-btn-font m-0",
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-sm",
+                                    attrs: {
+                                      type: "button",
+                                      title: "Delete User",
+                                    },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.deleteItem(item)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "fa fa-trash action-btn-font m-0",
+                                      attrs: { "aria-hidden": "true" },
+                                    }),
+                                  ]
+                                ),
+                              ]),
                             ])
                           }),
                         ],
@@ -897,7 +1359,13 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("service-add"),
+      _vm.visibleModal
+        ? _c("service-add", {
+            key: "editItem",
+            attrs: { item: _vm.editItem },
+            on: { executeMethod: _vm.getServiceList },
+          })
+        : _vm._e(),
     ],
     1
   )
@@ -907,34 +1375,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", [_vm._v("Services List")]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 text-right" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#service-add-modal",
-                },
-              },
-              [
-                _c("i", { staticClass: "fa fa-plus mr-1" }),
-                _vm._v(
-                  "\n                        Add New Service\n                    "
-                ),
-              ]
-            ),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("h1", [_vm._v("Services List")]),
     ])
   },
   function () {
@@ -953,35 +1395,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Action")]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success btn-sm",
-          attrs: { type: "button", title: "View Details" },
-        },
-        [_c("i", { staticClass: "fa fa-edit action-btn-font m-0" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger btn-sm",
-          attrs: { type: "button", title: "Delete User" },
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-trash action-btn-font m-0",
-            attrs: { "aria-hidden": "true" },
-          }),
-        ]
-      ),
     ])
   },
 ]

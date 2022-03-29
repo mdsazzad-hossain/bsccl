@@ -93,7 +93,7 @@
             </ul>
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="/dashboard" class="brand-link">
+            <a href="/d3cfdb7594b592d36a0179aaa03c3480" class="brand-link">
                 <img
                     width="100"
                     src="/assets/dist/img/logo.png"
@@ -196,10 +196,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <router-link
+                                        :to="{ name: 'TariffList' }"
+                                        class="nav-link"
+                                    >
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>IPLC</p>
-                                    </a>
+                                    </router-link>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">

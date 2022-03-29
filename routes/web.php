@@ -38,7 +38,7 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => ['auth','user.role']], function () {
 
     Route::get('/logout', [AuthController::class, 'destroy'])->name('user.logout');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/d3cfdb7594b592d36a0179aaa03c3480', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/get-user-list', [UserController::class, 'index'])->name('user.list');
     Route::get('/system-user-list', [UserController::class, 'system_user'])->name('system.user.list');
     Route::post('/store', [AuthController::class, 'store'])->name('register.store');
@@ -53,5 +53,8 @@ Route::group(['middleware' => ['auth','user.role']], function () {
     //Services Routes
     Route::get('/service-list', [ServiceController::class, 'index'])->name('service.list');
     Route::post('/service-store', [ServiceController::class, 'store'])->name('service.store');
+    Route::post('/change-service-status', [ServiceController::class, 'destroy'])->name('service.status.change');
+    Route::get('/get-iplc-list', [ServiceController::class, 'iplc_list'])->name('service.iplc');
+    Route::post('/capacity-update', [ServiceController::class, 'update_capacity'])->name('iplc.capacity.update');
 });
 

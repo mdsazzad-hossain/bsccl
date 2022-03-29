@@ -4,16 +4,17 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Services List</h1>
+                        <h1>Tariff IPLC List</h1>
                     </div>
                     <div class="col-md-6 text-right">
                         <button
                             type="button"
-                            @click="edit()"
+                            data-toggle="modal"
+                            data-target="#capacity-add-modal"
                             class="btn btn-outline-primary"
                         >
                             <i class="fa fa-plus mr-1"></i>
-                            Add New Service
+                            Add New Capacity
                         </button>
                     </div>
                 </div>
@@ -36,9 +37,10 @@
                                     <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Service Name</th>
+                                            <th>Service</th>
                                             <th>Sub Service</th>
-                                            <th>Status</th>
+                                            <th>Capacity</th>
+                                            <th>Charge</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -47,9 +49,9 @@
                                             v-if="listData.length == 0"
                                             class="text-center"
                                         >
-                                            <td colspan="2"></td>
+                                            <td colspan="3"></td>
                                             <span>Data Not Found</span>
-                                            <td colspan="2"></td>
+                                            <td colspan="3"></td>
                                         </tr>
                                         <tr
                                             v-for="(item, index) in listData"
@@ -57,28 +59,10 @@
                                         >
                                             <td>{{ index + 1 }}</td>
                                             <td>{{ item.service }}</td>
-                                            <td>
-                                                <span
-                                                    v-for="(
-                                                        sub, i
-                                                    ) in item.sub_services"
-                                                    :key="i"
-                                                    class="badge badge-primary mr-1"
-                                                    >{{ sub.sub_service }}</span
-                                                >
-                                            </td>
-                                            <td>
-                                                <span
-                                                    v-if="item.status == 1"
-                                                    class="badge badge-success"
-                                                    >Active</span
-                                                >
-                                                <span
-                                                    v-else
-                                                    class="badge badge-danger"
-                                                    >Inactive</span
-                                                >
-                                            </td>
+                                            <td>{{ item.sub_service }}</td>
+                                            <td>{{ item.capacity_name }}</td>
+                                            <td>{{ item.charge }}</td>
+
                                             <td>
                                                 <button
                                                     type="button"
@@ -94,7 +78,6 @@
                                                     type="button"
                                                     title="Delete User"
                                                     class="btn btn-danger btn-sm"
-                                                    @click="deleteItem(item)"
                                                 >
                                                     <i
                                                         class="fa fa-trash action-btn-font m-0"
@@ -111,19 +94,18 @@
                 </div>
             </div>
         </section>
-        <service-add
+        <capacity-update-modal
             :item="editItem"
-            @executeMethod="getServiceList"
-            key="editItem"
+            @executeMethod="getIplcList"
             v-if="visibleModal"
         />
     </div>
 </template>
 <script>
-import ServiceAdd from "./ServiceAdd.vue";
+import CapacityUpdateModal from "./CapacityUpdateModal.vue";
 export default {
     components: {
-        ServiceAdd,
+        CapacityUpdateModal,
     },
     data() {
         return {
@@ -134,43 +116,21 @@ export default {
         };
     },
     created() {
-        this.getServiceList();
+        this.getIplcList();
     },
     methods: {
-        getServiceList() {
+        getIplcList() {
             this.loading = true;
-            axios.get("/service-list").then((response) => {
+            axios.get("/get-iplc-list").then((response) => {
                 this.loading = false;
                 this.listData = response.data.data;
+                console.log(this.listData);
             });
         },
         edit(item) {
             this.editItem = item;
             this.visibleModal = true;
-            $("#service-add-modal").modal("show");
-        },
-        deleteItem(item) {
-            Swal.fire({
-                title: "Are you sure?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios
-                        .post("/change-service-status", { id: item.id })
-                        .then((response) => {
-                            this.getServiceList();
-                            Swal.fire(
-                                "Deleted!",
-                                "Service has been deleted.",
-                                "success"
-                            );
-                        });
-                }
-            });
+            $("#capacity-add-modal").modal("show");
         },
     },
 };

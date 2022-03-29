@@ -9,7 +9,15 @@ class SubService extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'sub_service'
-    ];
+    protected $guarded = [];
+
+    public function capacity()
+    {
+        return $this->hasMany(TariffCapacity::class, 'sub_service_id', 'id');
+    }
+
+    public function create_capacity()
+    {
+        return $this->hasMany(TariffCapacity::class, 'sub_service_id', 'id');
+    }
 }

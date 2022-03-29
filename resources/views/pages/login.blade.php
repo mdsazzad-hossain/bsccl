@@ -164,7 +164,8 @@
                         success: function(res) {
                             // $('#loading').css('cssText', 'display: none !important');
                             toastr.success('Login Successfull.')
-                            window.location.href = '/dashboard';
+                            window.location.href =
+                                '/d3cfdb7594b592d36a0179aaa03c3480';
                         },
                         error: function() {
                             // $('#loading').css('cssText', 'display: none !important');

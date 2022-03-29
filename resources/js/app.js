@@ -35,7 +35,7 @@ Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
 
 const router = new VueRouter({
-    mode: "history",
+    mode: "hash",
     routes,
 });
 new Vue({
