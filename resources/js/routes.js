@@ -4,6 +4,7 @@ const RolePermission = () =>
 const UserList = () => import("./components/configuration/UserList.vue");
 const ServiceList = () => import("./components/configuration/ServiceList.vue");
 const TariffList = () => import("./components/TariffList.vue");
+const DemandNote = () => import("./components/DemandNote.vue");
 const path = "d3cfdb7594b592d36a0179aaa03c3480";
 export default [
     {
@@ -30,6 +31,11 @@ export default [
         path: "/tariff-list",
         name: "TariffList",
         component: TariffList,
+    },
+    {
+        path: "/demand-note",
+        name: "DemandNote",
+        component: DemandNote,
     },
     { path: "/*", component: Dashboard },
 ];

@@ -5330,6 +5330,10 @@ var TariffList = function TariffList() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_TariffList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/TariffList.vue */ "./resources/js/components/TariffList.vue"));
 };
 
+var DemandNote = function DemandNote() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_DemandNote_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/DemandNote.vue */ "./resources/js/components/DemandNote.vue"));
+};
+
 var path = "d3cfdb7594b592d36a0179aaa03c3480";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
   path: path + "/dashboard",
@@ -5351,6 +5355,10 @@ var path = "d3cfdb7594b592d36a0179aaa03c3480";
   path: "/tariff-list",
   name: "TariffList",
   component: TariffList
+}, {
+  path: "/demand-note",
+  name: "DemandNote",
+  component: DemandNote
 }, {
   path: "/*",
   component: Dashboard
@@ -67532,10 +67540,8 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("strong", [
-        _vm._v("Copyright © 2014-2021\n            "),
-        _c("a", { attrs: { href: "https://adminlte.io" } }, [
-          _vm._v("AdminLTE.io"),
-        ]),
+        _vm._v("Copyright © 2014-2022\n            "),
+        _c("a", { attrs: { href: "Dream71.com" } }, [_vm._v("Dream71")]),
         _vm._v("."),
       ]),
       _vm._v("\n        All rights reserved.\n    "),
@@ -82990,7 +82996,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1,"resources_js_components_configuration_ServiceList_vue":1,"resources_js_components_TariffList_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Dashboard_vue":1,"resources_js_components_configuration_RolePermission_vue":1,"resources_js_components_configuration_UserList_vue":1,"resources_js_components_configuration_ServiceList_vue":1,"resources_js_components_TariffList_vue":1,"resources_js_components_DemandNote_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

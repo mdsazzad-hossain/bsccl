@@ -20,6 +20,33 @@ class ServiceController extends Controller
         ],200);
     }
 
+    public function get_service()
+    {
+        $models = Service::orderBy('id', 'DESC')->get();
+        return response([
+            'msg'=> 'Success',
+            'data'=> $models
+        ],200);
+    }
+
+    public function get_sub_service(Request $request)
+    {
+        $models = SubService::where('service_id', $request->service_id)->orderBy('id', 'DESC')->get();
+        return response([
+            'msg'=> 'Success',
+            'data'=> $models
+        ],200);
+    }
+
+    public function get_capacity(Request $request)
+    {
+        $models = TariffCapacity::where('sub_service_id', $request->sub_service_id)->orderBy('id', 'DESC')->get();
+        return response([
+            'msg'=> 'Success',
+            'data'=> $models
+        ],200);
+    }
+
     public function iplc_list()
     {
         $models = Service::leftJoin('sub_services','sub_services.service_id','services.id')

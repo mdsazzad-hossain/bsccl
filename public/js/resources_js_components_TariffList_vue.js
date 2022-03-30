@@ -212,6 +212,370 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ["item"],
+  data: function data() {
+    return {
+      loading: false,
+      visibleForm: false,
+      userList: [],
+      serviceList: [],
+      subServiceList: [],
+      capacityList: [],
+      demand: {
+        user_id: "",
+        service_id: "",
+        sub_service_id: "",
+        capacity_id: "",
+        discount: "",
+        deposit: ""
+      }
+    };
+  },
+  created: function created() {
+    this.visibleForm = true; // this.getData();
+
+    this.getUserList();
+    this.getServiceList();
+  },
+  watch: {
+    "demand.service_id": function demandService_id() {
+      this.getSubServiceList(this.demand.service_id);
+    },
+    "demand.sub_service_id": function demandSub_service_id() {
+      this.getCapacityList(this.demand.sub_service_id);
+    },
+    "demand.capacity_id": function demandCapacity_id() {
+      this.getValue(this.demand.capacity_id);
+    }
+  },
+  methods: {
+    getValue: function getValue(id) {
+      var _this = this;
+
+      this.capacityList.map(function (item) {
+        if (item.id === parseInt(id)) {
+          _this.demand.deposit = item.charge;
+        }
+      });
+    },
+    getUserList: function getUserList() {
+      var _this2 = this;
+
+      axios.get("/get-user-list").then(function (res) {
+        _this2.loading = false;
+        _this2.userList = res.data.users;
+      })["catch"](function () {
+        _this2.loading = false;
+        $("#capacity-add-modal").modal("hide");
+        Swal.fire({
+          icon: "warning",
+          title: "wrong creidentials!"
+        });
+      });
+    },
+    getServiceList: function getServiceList() {
+      var _this3 = this;
+
+      axios.get("/get-service-list").then(function (res) {
+        _this3.loading = false;
+        _this3.serviceList = res.data.data;
+      })["catch"](function () {});
+    },
+    getSubServiceList: function getSubServiceList(id) {
+      var _this4 = this;
+
+      this.loading = true;
+      axios.post("/get-sub-service-list", {
+        service_id: id
+      }).then(function (res) {
+        _this4.loading = false;
+        _this4.subServiceList = res.data.data;
+      })["catch"](function () {});
+    },
+    getCapacityList: function getCapacityList(id) {
+      var _this5 = this;
+
+      this.loading = true;
+      axios.post("/get-capacity-list", {
+        sub_service_id: id
+      }).then(function (res) {
+        _this5.loading = false;
+        _this5.capacityList = res.data.data;
+      })["catch"](function () {});
+    },
+    getData: function getData() {
+      if (this.item) {
+        this.tariff = this.item;
+        console.log(this.tariff);
+      }
+    },
+    visibleAction: function visibleAction() {
+      this.visibleForm = !this.visibleForm;
+    },
+    onSubmit: function onSubmit() {
+      var _this6 = this;
+
+      axios.post("/capacity-update", this.tariff).then(function (res) {
+        _this6.loading = false;
+        Toast.fire({
+          icon: "success",
+          title: "Data Upload Successfull."
+        });
+
+        _this6.$emit("executeMethod");
+
+        $("#capacity-add-modal").modal("hide");
+      })["catch"](function () {
+        _this6.loading = false;
+        $("#capacity-add-modal").modal("hide");
+        Swal.fire({
+          icon: "warning",
+          title: "wrong creidentials!"
+        });
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TariffList.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TariffList.vue?vue&type=script&lang=js& ***!
@@ -223,6 +587,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _CapacityUpdateModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapacityUpdateModal.vue */ "./resources/js/components/CapacityUpdateModal.vue");
+/* harmony import */ var _DemandNoteAdd_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DemandNoteAdd.vue */ "./resources/js/components/DemandNoteAdd.vue");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 //
 //
@@ -328,14 +693,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    CapacityUpdateModal: _CapacityUpdateModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    CapacityUpdateModal: _CapacityUpdateModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    DemandModal: _DemandNoteAdd_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       loading: false,
       visibleModal: false,
+      visibleDemandModal: false,
       editItem: "",
       listData: []
     };
@@ -351,13 +719,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/get-iplc-list").then(function (response) {
         _this.loading = false;
         _this.listData = response.data.data;
-        console.log(_this.listData);
       });
     },
     edit: function edit(item) {
       this.editItem = item;
       this.visibleModal = true;
       $("#capacity-add-modal").modal("show");
+    },
+    showModal: function showModal() {
+      this.visibleDemandModal = true;
+      $("#demand-modal").modal("show");
     }
   }
 });
@@ -381,6 +752,29 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.bulk-tag[data-v-28e64b2f] {\r\n    margin-left: 14%;\r\n    margin-bottom: 0px;\r\n    margin-top: 7px;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js */ "./node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bulk-tag[data-v-59dac029] {\r\n    margin-left: 14%;\r\n    margin-bottom: 0px;\r\n    margin-top: 7px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -488,6 +882,35 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityUpdateModal_vue_vue_type_style_index_0_id_28e64b2f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_style_index_0_id_59dac029_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css& */ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_style_index_0_id_59dac029_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_style_index_0_id_59dac029_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -809,6 +1232,46 @@ component.options.__file = "resources/js/components/CapacityUpdateModal.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/DemandNoteAdd.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/DemandNoteAdd.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DemandNoteAdd_vue_vue_type_template_id_59dac029_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true& */ "./resources/js/components/DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true&");
+/* harmony import */ var _DemandNoteAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DemandNoteAdd.vue?vue&type=script&lang=js& */ "./resources/js/components/DemandNoteAdd.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DemandNoteAdd_vue_vue_type_style_index_0_id_59dac029_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css& */ "./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DemandNoteAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DemandNoteAdd_vue_vue_type_template_id_59dac029_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DemandNoteAdd_vue_vue_type_template_id_59dac029_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "59dac029",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DemandNoteAdd.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/TariffList.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/TariffList.vue ***!
@@ -862,6 +1325,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DemandNoteAdd.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/DemandNoteAdd.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DemandNoteAdd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/TariffList.vue?vue&type=script&lang=js&":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/TariffList.vue?vue&type=script&lang=js& ***!
@@ -889,6 +1367,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_style_index_0_id_59dac029_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=style&index=0&id=59dac029&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/CapacityUpdateModal.vue?vue&type=template&id=28e64b2f&scoped=true&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/CapacityUpdateModal.vue?vue&type=template&id=28e64b2f&scoped=true& ***!
@@ -901,6 +1391,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityUpdateModal_vue_vue_type_template_id_28e64b2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityUpdateModal_vue_vue_type_template_id_28e64b2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapacityUpdateModal.vue?vue&type=template&id=28e64b2f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CapacityUpdateModal.vue?vue&type=template&id=28e64b2f&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_template_id_59dac029_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_template_id_59dac029_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DemandNoteAdd_vue_vue_type_template_id_59dac029_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true&");
 
 
 /***/ }),
@@ -1497,6 +2003,962 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DemandNoteAdd.vue?vue&type=template&id=59dac029&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "modal fade", attrs: { id: "demand-modal" } },
+    [
+      _c("div", { staticClass: "modal-dialog modal-lg" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "card card-primary" }, [
+              _vm.loading
+                ? _c("div", { staticClass: "overlay" }, [
+                    _c("i", { staticClass: "fa fa-spinner fa-spin" }),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.visibleForm
+                ? _c(
+                    "div",
+                    { staticClass: "card-body" },
+                    [
+                      _c("ValidationObserver", {
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "default",
+                              fn: function (ref) {
+                                var handleSubmit = ref.handleSubmit
+                                return [
+                                  _c(
+                                    "form",
+                                    {
+                                      on: {
+                                        submit: function ($event) {
+                                          $event.preventDefault()
+                                          return handleSubmit(_vm.onSubmit)
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Users",
+                                                rules: "required|min_value:1",
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "form-group",
+                                                          },
+                                                          [
+                                                            _c("label", [
+                                                              _vm._v("Users"),
+                                                            ]),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "select",
+                                                              {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.demand
+                                                                        .user_id,
+                                                                    expression:
+                                                                      "demand.user_id",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                staticStyle: {
+                                                                  width: "100%",
+                                                                },
+                                                                on: {
+                                                                  change:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      var $$selectedVal =
+                                                                        Array.prototype.filter
+                                                                          .call(
+                                                                            $event
+                                                                              .target
+                                                                              .options,
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              return o.selected
+                                                                            }
+                                                                          )
+                                                                          .map(
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              var val =
+                                                                                "_value" in
+                                                                                o
+                                                                                  ? o._value
+                                                                                  : o.value
+                                                                              return val
+                                                                            }
+                                                                          )
+                                                                      _vm.$set(
+                                                                        _vm.demand,
+                                                                        "user_id",
+                                                                        $event
+                                                                          .target
+                                                                          .multiple
+                                                                          ? $$selectedVal
+                                                                          : $$selectedVal[0]
+                                                                      )
+                                                                    },
+                                                                },
+                                                              },
+                                                              _vm._l(
+                                                                _vm.userList,
+                                                                function (
+                                                                  item,
+                                                                  index
+                                                                ) {
+                                                                  return _c(
+                                                                    "option",
+                                                                    {
+                                                                      key: index,
+                                                                      domProps:
+                                                                        {
+                                                                          value:
+                                                                            item.id,
+                                                                        },
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                        " +
+                                                                          _vm._s(
+                                                                            item.name
+                                                                          ) +
+                                                                          "\n                                                    "
+                                                                      ),
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "invalid-feedback d-block",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    errors[0]
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                true
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Services",
+                                                rules: "required|min_value:1",
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "form-group",
+                                                          },
+                                                          [
+                                                            _c("label", [
+                                                              _vm._v(
+                                                                "Services"
+                                                              ),
+                                                            ]),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "select",
+                                                              {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.demand
+                                                                        .service_id,
+                                                                    expression:
+                                                                      "\n                                                        demand.service_id\n                                                    ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                staticStyle: {
+                                                                  width: "100%",
+                                                                },
+                                                                on: {
+                                                                  change:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      var $$selectedVal =
+                                                                        Array.prototype.filter
+                                                                          .call(
+                                                                            $event
+                                                                              .target
+                                                                              .options,
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              return o.selected
+                                                                            }
+                                                                          )
+                                                                          .map(
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              var val =
+                                                                                "_value" in
+                                                                                o
+                                                                                  ? o._value
+                                                                                  : o.value
+                                                                              return val
+                                                                            }
+                                                                          )
+                                                                      _vm.$set(
+                                                                        _vm.demand,
+                                                                        "service_id",
+                                                                        $event
+                                                                          .target
+                                                                          .multiple
+                                                                          ? $$selectedVal
+                                                                          : $$selectedVal[0]
+                                                                      )
+                                                                    },
+                                                                },
+                                                              },
+                                                              _vm._l(
+                                                                _vm.serviceList,
+                                                                function (
+                                                                  item,
+                                                                  index
+                                                                ) {
+                                                                  return _c(
+                                                                    "option",
+                                                                    {
+                                                                      key: index,
+                                                                      domProps:
+                                                                        {
+                                                                          value:
+                                                                            item.id,
+                                                                        },
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                        " +
+                                                                          _vm._s(
+                                                                            item.service
+                                                                          ) +
+                                                                          "\n                                                    "
+                                                                      ),
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "invalid-feedback d-block",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    errors[0]
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                true
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Sub Services",
+                                                rules: "required|min_value:1",
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "form-group",
+                                                          },
+                                                          [
+                                                            _c("label", [
+                                                              _vm._v(
+                                                                "Sub Services"
+                                                              ),
+                                                            ]),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "select",
+                                                              {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.demand
+                                                                        .sub_service_id,
+                                                                    expression:
+                                                                      "\n                                                        demand.sub_service_id\n                                                    ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                staticStyle: {
+                                                                  width: "100%",
+                                                                },
+                                                                on: {
+                                                                  change:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      var $$selectedVal =
+                                                                        Array.prototype.filter
+                                                                          .call(
+                                                                            $event
+                                                                              .target
+                                                                              .options,
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              return o.selected
+                                                                            }
+                                                                          )
+                                                                          .map(
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              var val =
+                                                                                "_value" in
+                                                                                o
+                                                                                  ? o._value
+                                                                                  : o.value
+                                                                              return val
+                                                                            }
+                                                                          )
+                                                                      _vm.$set(
+                                                                        _vm.demand,
+                                                                        "sub_service_id",
+                                                                        $event
+                                                                          .target
+                                                                          .multiple
+                                                                          ? $$selectedVal
+                                                                          : $$selectedVal[0]
+                                                                      )
+                                                                    },
+                                                                },
+                                                              },
+                                                              _vm._l(
+                                                                _vm.subServiceList,
+                                                                function (
+                                                                  item,
+                                                                  index
+                                                                ) {
+                                                                  return _c(
+                                                                    "option",
+                                                                    {
+                                                                      key: index,
+                                                                      domProps:
+                                                                        {
+                                                                          value:
+                                                                            item.id,
+                                                                        },
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                        " +
+                                                                          _vm._s(
+                                                                            item.sub_service
+                                                                          ) +
+                                                                          "\n                                                    "
+                                                                      ),
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "invalid-feedback d-block",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    errors[0]
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                true
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Capacity",
+                                                rules: "required|min_value:1",
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "form-group",
+                                                          },
+                                                          [
+                                                            _c("label", [
+                                                              _vm._v(
+                                                                "Capacity"
+                                                              ),
+                                                            ]),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "select",
+                                                              {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.demand
+                                                                        .capacity_id,
+                                                                    expression:
+                                                                      "\n                                                        demand.capacity_id\n                                                    ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                staticStyle: {
+                                                                  width: "100%",
+                                                                },
+                                                                on: {
+                                                                  change:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      var $$selectedVal =
+                                                                        Array.prototype.filter
+                                                                          .call(
+                                                                            $event
+                                                                              .target
+                                                                              .options,
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              return o.selected
+                                                                            }
+                                                                          )
+                                                                          .map(
+                                                                            function (
+                                                                              o
+                                                                            ) {
+                                                                              var val =
+                                                                                "_value" in
+                                                                                o
+                                                                                  ? o._value
+                                                                                  : o.value
+                                                                              return val
+                                                                            }
+                                                                          )
+                                                                      _vm.$set(
+                                                                        _vm.demand,
+                                                                        "capacity_id",
+                                                                        $event
+                                                                          .target
+                                                                          .multiple
+                                                                          ? $$selectedVal
+                                                                          : $$selectedVal[0]
+                                                                      )
+                                                                    },
+                                                                },
+                                                              },
+                                                              _vm._l(
+                                                                _vm.capacityList,
+                                                                function (
+                                                                  item,
+                                                                  index
+                                                                ) {
+                                                                  return _c(
+                                                                    "option",
+                                                                    {
+                                                                      key: index,
+                                                                      domProps:
+                                                                        {
+                                                                          value:
+                                                                            item.id,
+                                                                        },
+                                                                      on: {
+                                                                        click:
+                                                                          function (
+                                                                            $event
+                                                                          ) {
+                                                                            return _vm.getValue(
+                                                                              item
+                                                                            )
+                                                                          },
+                                                                      },
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                        " +
+                                                                          _vm._s(
+                                                                            item.capacity_name
+                                                                          ) +
+                                                                          "\n                                                    "
+                                                                      ),
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "invalid-feedback d-block",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    errors[0]
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                true
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Discount",
+                                                rules: "required",
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "form-group",
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "label",
+                                                              {
+                                                                attrs: {
+                                                                  for: "discount",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Adjust/Discount"
+                                                                ),
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c("input", {
+                                                              directives: [
+                                                                {
+                                                                  name: "model",
+                                                                  rawName:
+                                                                    "v-model",
+                                                                  value:
+                                                                    _vm.demand
+                                                                      .discount,
+                                                                  expression:
+                                                                    "\n                                                        demand.discount\n                                                    ",
+                                                                },
+                                                              ],
+                                                              staticClass:
+                                                                "form-control",
+                                                              attrs: {
+                                                                type: "number",
+                                                                id: "discount",
+                                                                placeholder:
+                                                                  "Enter adjust/discount",
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  _vm.demand
+                                                                    .discount,
+                                                              },
+                                                              on: {
+                                                                input:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    if (
+                                                                      $event
+                                                                        .target
+                                                                        .composing
+                                                                    ) {
+                                                                      return
+                                                                    }
+                                                                    _vm.$set(
+                                                                      _vm.demand,
+                                                                      "discount",
+                                                                      $event
+                                                                        .target
+                                                                        .value
+                                                                    )
+                                                                  },
+                                                              },
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "invalid-feedback d-block",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    errors[0]
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                true
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-6" },
+                                          [
+                                            _c("ValidationProvider", {
+                                              attrs: {
+                                                name: "Security Deposit",
+                                                rules: "required",
+                                              },
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var errors = ref.errors
+                                                      return [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "form-group",
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "label",
+                                                              {
+                                                                attrs: {
+                                                                  for: "sub",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Security Deposit"
+                                                                ),
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c("input", {
+                                                              directives: [
+                                                                {
+                                                                  name: "model",
+                                                                  rawName:
+                                                                    "v-model",
+                                                                  value:
+                                                                    _vm.demand
+                                                                      .deposit,
+                                                                  expression:
+                                                                    "demand.deposit",
+                                                                },
+                                                              ],
+                                                              staticClass:
+                                                                "form-control",
+                                                              attrs: {
+                                                                type: "number",
+                                                                id: "deposit",
+                                                                placeholder:
+                                                                  "Enter security deposit",
+                                                              },
+                                                              domProps: {
+                                                                value:
+                                                                  _vm.demand
+                                                                    .deposit,
+                                                              },
+                                                              on: {
+                                                                input:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    if (
+                                                                      $event
+                                                                        .target
+                                                                        .composing
+                                                                    ) {
+                                                                      return
+                                                                    }
+                                                                    _vm.$set(
+                                                                      _vm.demand,
+                                                                      "deposit",
+                                                                      $event
+                                                                        .target
+                                                                        .value
+                                                                    )
+                                                                  },
+                                                              },
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "invalid-feedback d-block",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    errors[0]
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                true
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "text-right" }, [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            attrs: { type: "submit" },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        Submit\n                                    "
+                                            ),
+                                          ]
+                                        ),
+                                      ]),
+                                    ]
+                                  ),
+                                ]
+                              },
+                            },
+                          ],
+                          null,
+                          false,
+                          2874149675
+                        ),
+                      }),
+                    ],
+                    1
+                  )
+                : _vm._e(),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title mr-5" }, [
+        _vm._v("IPLC NRC Demand Note Form"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TariffList.vue?vue&type=template&id=7f46578d&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TariffList.vue?vue&type=template&id=7f46578d& ***!
@@ -1516,7 +2978,30 @@ var render = function () {
     "div",
     { staticClass: "content-wrapper" },
     [
-      _vm._m(0),
+      _c("section", { staticClass: "content-header" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mb-2" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.showModal },
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus mr-1" }),
+                  _vm._v(
+                    "\n                        Create Demand Note\n                    "
+                  ),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
@@ -1606,6 +3091,8 @@ var render = function () {
             on: { executeMethod: _vm.getIplcList },
           })
         : _vm._e(),
+      _vm._v(" "),
+      _vm.visibleDemandModal ? _c("demand-modal") : _vm._e(),
     ],
     1
   )
@@ -1615,14 +3102,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", [_vm._v("Tariff IPLC List")]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("h1", [_vm._v("Tariff IPLC List")]),
     ])
   },
   function () {

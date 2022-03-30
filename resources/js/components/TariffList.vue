@@ -6,17 +6,16 @@
                     <div class="col-sm-6">
                         <h1>Tariff IPLC List</h1>
                     </div>
-                    <!-- <div class="col-md-6 text-right">
+                    <div class="col-md-6 text-right">
                         <button
                             type="button"
-                            data-toggle="modal"
-                            data-target="#capacity-add-modal"
+                            @click="showModal"
                             class="btn btn-outline-primary"
                         >
                             <i class="fa fa-plus mr-1"></i>
-                            Add New Capacity
+                            Create Demand Note
                         </button>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -99,18 +98,22 @@
             @executeMethod="getIplcList"
             v-if="visibleModal"
         />
+        <demand-modal v-if="visibleDemandModal" />
     </div>
 </template>
 <script>
 import CapacityUpdateModal from "./CapacityUpdateModal.vue";
+import DemandModal from "./DemandNoteAdd.vue";
 export default {
     components: {
         CapacityUpdateModal,
+        DemandModal,
     },
     data() {
         return {
             loading: false,
             visibleModal: false,
+            visibleDemandModal: false,
             editItem: "",
             listData: [],
         };
@@ -124,13 +127,16 @@ export default {
             axios.get("/get-iplc-list").then((response) => {
                 this.loading = false;
                 this.listData = response.data.data;
-                console.log(this.listData);
             });
         },
         edit(item) {
             this.editItem = item;
             this.visibleModal = true;
             $("#capacity-add-modal").modal("show");
+        },
+        showModal() {
+            this.visibleDemandModal = true;
+            $("#demand-modal").modal("show");
         },
     },
 };

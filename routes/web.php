@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth','user.role']], function () {
 
     //Services Routes
     Route::get('/service-list', [ServiceController::class, 'index'])->name('service.list');
+    Route::get('/get-service-list', [ServiceController::class, 'get_service'])->name('get.service.list');
+    Route::post('/get-sub-service-list', [ServiceController::class, 'get_sub_service'])->name('get.sub.service.list');
+    Route::post('/get-capacity-list', [ServiceController::class, 'get_capacity'])->name('get.capacity.list');
     Route::post('/service-store', [ServiceController::class, 'store'])->name('service.store');
     Route::post('/change-service-status', [ServiceController::class, 'destroy'])->name('service.status.change');
     Route::get('/get-iplc-list', [ServiceController::class, 'iplc_list'])->name('service.iplc');
