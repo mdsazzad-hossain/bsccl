@@ -2287,20 +2287,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   methods: {
@@ -2319,9 +2305,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
-    console.log("test");
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -5336,7 +5320,7 @@ var DemandNote = function DemandNote() {
 
 var path = "d3cfdb7594b592d36a0179aaa03c3480";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
-  path: path + "/dashboard",
+  path: "/",
   name: "Dashboard",
   component: Dashboard
 }, {
@@ -67287,8 +67271,10 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
+                  _vm._m(5),
+                  _vm._v(" "),
                   _c("li", { staticClass: "nav-item" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("ul", { staticClass: "nav nav-treeview" }, [
                       _c(
@@ -67313,11 +67299,13 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _vm._m(6),
-                      _vm._v(" "),
                       _vm._m(7),
+                      _vm._v(" "),
+                      _vm._m(8),
                     ]),
                   ]),
+                  _vm._v(" "),
+                  _vm._m(9),
                 ]
               ),
             ]),
@@ -67327,7 +67315,7 @@ var render = function () {
       _vm._v(" "),
       _c("router-view", { key: _vm.$route.fullPath }),
       _vm._v(" "),
-      _vm._m(8),
+      _vm._m(10),
     ],
     1
   )
@@ -67438,7 +67426,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fa fa-users", attrs: { "aria-hidden": "true" } }),
+      _c("i", { staticClass: "fa fa-cog", attrs: { "aria-hidden": "true" } }),
       _vm._v(" "),
       _c("p", [
         _vm._v(
@@ -67452,9 +67440,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-users nav-icon" }),
+        _vm._v(" "),
+        _c("p", [_vm._v("Customers")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
       _c("i", {
-        staticClass: "fa fa-text-width",
+        staticClass: "fa fa-server",
         attrs: { "aria-hidden": "true" },
       }),
       _vm._v(" "),
@@ -67487,6 +67487,18 @@ var staticRenderFns = [
         _c("i", { staticClass: "far fa-circle nav-icon" }),
         _vm._v(" "),
         _c("p", [_vm._v("Colocation Service")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-text-width nav-icon" }),
+        _vm._v(" "),
+        _c("p", [_vm._v("Tariff")]),
       ]),
     ])
   },

@@ -124,7 +124,7 @@
                     >
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <i class="fa fa-cog" aria-hidden="true"></i>
                                 <p>
                                     Configuration
                                     <i class="right fas fa-angle-left"></i>
@@ -160,35 +160,15 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                                <p>
-                                    Users
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Customer List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>System User List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i
-                                    class="fa fa-text-width"
-                                    aria-hidden="true"
-                                ></i>
+                                <i class="fa fa-users nav-icon"></i>
+                                <p>Customers</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-server" aria-hidden="true"></i>
                                 <p>
                                     Services
                                     <i class="right fas fa-angle-left"></i>
@@ -217,6 +197,12 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-text-width nav-icon"></i>
+                                <p>Tariff</p>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -256,8 +242,6 @@ export default {
                 });
         },
     },
-    mounted() {
-        console.log("test");
-    },
+    mounted() {},
 };
 </script>

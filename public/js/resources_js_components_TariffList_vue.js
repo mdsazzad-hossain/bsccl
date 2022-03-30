@@ -448,6 +448,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["item"],
   data: function data() {
@@ -569,6 +598,12 @@ __webpack_require__.r(__webpack_exports__);
           icon: "warning",
           title: "wrong creidentials!"
         });
+      });
+    },
+    hideModal: function hideModal() {
+      $("#demand-modal").modal("hide");
+      this.$router.push({
+        name: "DemandNote"
       });
     }
   }
@@ -2149,35 +2184,55 @@ var render = function () {
                                                                     },
                                                                 },
                                                               },
-                                                              _vm._l(
-                                                                _vm.userList,
-                                                                function (
-                                                                  item,
-                                                                  index
-                                                                ) {
-                                                                  return _c(
-                                                                    "option",
-                                                                    {
-                                                                      key: index,
-                                                                      domProps:
-                                                                        {
-                                                                          value:
-                                                                            item.id,
-                                                                        },
+                                                              [
+                                                                _vm._l(
+                                                                  _vm.userList,
+                                                                  function (
+                                                                    item,
+                                                                    index
+                                                                  ) {
+                                                                    return _c(
+                                                                      "option",
+                                                                      {
+                                                                        key: index,
+                                                                        domProps:
+                                                                          {
+                                                                            value:
+                                                                              item.id,
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "\n                                                        " +
+                                                                            _vm._s(
+                                                                              item.name
+                                                                            ) +
+                                                                            "\n                                                    "
+                                                                        ),
+                                                                      ]
+                                                                    )
+                                                                  }
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "option",
+                                                                  {
+                                                                    attrs: {
+                                                                      value: "",
+                                                                      selected:
+                                                                        "selected",
+                                                                      disabled:
+                                                                        "",
                                                                     },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        " +
-                                                                          _vm._s(
-                                                                            item.name
-                                                                          ) +
-                                                                          "\n                                                    "
-                                                                      ),
-                                                                    ]
-                                                                  )
-                                                                }
-                                                              ),
-                                                              0
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                        Select Customer\n                                                    "
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ],
+                                                              2
                                                             ),
                                                             _vm._v(" "),
                                                             _c(
@@ -2298,35 +2353,55 @@ var render = function () {
                                                                     },
                                                                 },
                                                               },
-                                                              _vm._l(
-                                                                _vm.serviceList,
-                                                                function (
-                                                                  item,
-                                                                  index
-                                                                ) {
-                                                                  return _c(
-                                                                    "option",
-                                                                    {
-                                                                      key: index,
-                                                                      domProps:
-                                                                        {
-                                                                          value:
-                                                                            item.id,
-                                                                        },
+                                                              [
+                                                                _vm._l(
+                                                                  _vm.serviceList,
+                                                                  function (
+                                                                    item,
+                                                                    index
+                                                                  ) {
+                                                                    return _c(
+                                                                      "option",
+                                                                      {
+                                                                        key: index,
+                                                                        domProps:
+                                                                          {
+                                                                            value:
+                                                                              item.id,
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "\n                                                        " +
+                                                                            _vm._s(
+                                                                              item.service
+                                                                            ) +
+                                                                            "\n                                                    "
+                                                                        ),
+                                                                      ]
+                                                                    )
+                                                                  }
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "option",
+                                                                  {
+                                                                    attrs: {
+                                                                      value: "",
+                                                                      selected:
+                                                                        "selected",
+                                                                      disabled:
+                                                                        "",
                                                                     },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        " +
-                                                                          _vm._s(
-                                                                            item.service
-                                                                          ) +
-                                                                          "\n                                                    "
-                                                                      ),
-                                                                    ]
-                                                                  )
-                                                                }
-                                                              ),
-                                                              0
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                        Select Service\n                                                    "
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ],
+                                                              2
                                                             ),
                                                             _vm._v(" "),
                                                             _c(
@@ -2447,35 +2522,55 @@ var render = function () {
                                                                     },
                                                                 },
                                                               },
-                                                              _vm._l(
-                                                                _vm.subServiceList,
-                                                                function (
-                                                                  item,
-                                                                  index
-                                                                ) {
-                                                                  return _c(
-                                                                    "option",
-                                                                    {
-                                                                      key: index,
-                                                                      domProps:
-                                                                        {
-                                                                          value:
-                                                                            item.id,
-                                                                        },
+                                                              [
+                                                                _vm._l(
+                                                                  _vm.subServiceList,
+                                                                  function (
+                                                                    item,
+                                                                    index
+                                                                  ) {
+                                                                    return _c(
+                                                                      "option",
+                                                                      {
+                                                                        key: index,
+                                                                        domProps:
+                                                                          {
+                                                                            value:
+                                                                              item.id,
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "\n                                                        " +
+                                                                            _vm._s(
+                                                                              item.sub_service
+                                                                            ) +
+                                                                            "\n                                                    "
+                                                                        ),
+                                                                      ]
+                                                                    )
+                                                                  }
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "option",
+                                                                  {
+                                                                    attrs: {
+                                                                      value: "",
+                                                                      selected:
+                                                                        "selected",
+                                                                      disabled:
+                                                                        "",
                                                                     },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        " +
-                                                                          _vm._s(
-                                                                            item.sub_service
-                                                                          ) +
-                                                                          "\n                                                    "
-                                                                      ),
-                                                                    ]
-                                                                  )
-                                                                }
-                                                              ),
-                                                              0
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                        Select Sub Service\n                                                    "
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ],
+                                                              2
                                                             ),
                                                             _vm._v(" "),
                                                             _c(
@@ -2596,45 +2691,65 @@ var render = function () {
                                                                     },
                                                                 },
                                                               },
-                                                              _vm._l(
-                                                                _vm.capacityList,
-                                                                function (
-                                                                  item,
-                                                                  index
-                                                                ) {
-                                                                  return _c(
-                                                                    "option",
-                                                                    {
-                                                                      key: index,
-                                                                      domProps:
-                                                                        {
-                                                                          value:
-                                                                            item.id,
-                                                                        },
-                                                                      on: {
-                                                                        click:
-                                                                          function (
-                                                                            $event
-                                                                          ) {
-                                                                            return _vm.getValue(
-                                                                              item
-                                                                            )
+                                                              [
+                                                                _vm._l(
+                                                                  _vm.capacityList,
+                                                                  function (
+                                                                    item,
+                                                                    index
+                                                                  ) {
+                                                                    return _c(
+                                                                      "option",
+                                                                      {
+                                                                        key: index,
+                                                                        domProps:
+                                                                          {
+                                                                            value:
+                                                                              item.id,
                                                                           },
+                                                                        on: {
+                                                                          click:
+                                                                            function (
+                                                                              $event
+                                                                            ) {
+                                                                              return _vm.getValue(
+                                                                                item
+                                                                              )
+                                                                            },
+                                                                        },
                                                                       },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "\n                                                        " +
+                                                                            _vm._s(
+                                                                              item.capacity_name
+                                                                            ) +
+                                                                            "\n                                                    "
+                                                                        ),
+                                                                      ]
+                                                                    )
+                                                                  }
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "option",
+                                                                  {
+                                                                    attrs: {
+                                                                      value: "",
+                                                                      selected:
+                                                                        "selected",
+                                                                      disabled:
+                                                                        "",
                                                                     },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        " +
-                                                                          _vm._s(
-                                                                            item.capacity_name
-                                                                          ) +
-                                                                          "\n                                                    "
-                                                                      ),
-                                                                    ]
-                                                                  )
-                                                                }
-                                                              ),
-                                                              0
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                        Select Capacity\n                                                    "
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ],
+                                                              2
                                                             ),
                                                             _vm._v(" "),
                                                             _c(
@@ -2899,7 +3014,8 @@ var render = function () {
                                           "button",
                                           {
                                             staticClass: "btn btn-primary",
-                                            attrs: { type: "submit" },
+                                            attrs: { type: "button" },
+                                            on: { click: _vm.hideModal },
                                           },
                                           [
                                             _vm._v(
@@ -2916,7 +3032,7 @@ var render = function () {
                           ],
                           null,
                           false,
-                          2640255627
+                          1815525875
                         ),
                       }),
                     ],

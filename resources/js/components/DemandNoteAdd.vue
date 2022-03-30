@@ -44,6 +44,13 @@
                                                         >
                                                             {{ item.name }}
                                                         </option>
+                                                        <option
+                                                            value=""
+                                                            selected="selected"
+                                                            disabled
+                                                        >
+                                                            Select Customer
+                                                        </option>
                                                     </select>
                                                     <span
                                                         class="invalid-feedback d-block"
@@ -75,6 +82,13 @@
                                                             :value="item.id"
                                                         >
                                                             {{ item.service }}
+                                                        </option>
+                                                        <option
+                                                            value=""
+                                                            selected="selected"
+                                                            disabled
+                                                        >
+                                                            Select Service
                                                         </option>
                                                     </select>
                                                     <span
@@ -109,6 +123,13 @@
                                                             {{
                                                                 item.sub_service
                                                             }}
+                                                        </option>
+                                                        <option
+                                                            value=""
+                                                            selected="selected"
+                                                            disabled
+                                                        >
+                                                            Select Sub Service
                                                         </option>
                                                     </select>
                                                     <span
@@ -146,6 +167,13 @@
                                                             {{
                                                                 item.capacity_name
                                                             }}
+                                                        </option>
+                                                        <option
+                                                            value=""
+                                                            selected="selected"
+                                                            disabled
+                                                        >
+                                                            Select Capacity
                                                         </option>
                                                     </select>
                                                     <span
@@ -208,7 +236,8 @@
                                     </div>
                                     <div class="text-right">
                                         <button
-                                            type="submit"
+                                            @click="hideModal"
+                                            type="button"
                                             class="btn btn-primary"
                                         >
                                             Submit
@@ -343,6 +372,10 @@ export default {
                         title: "wrong creidentials!",
                     });
                 });
+        },
+        hideModal() {
+            $("#demand-modal").modal("hide");
+            this.$router.push({ name: "DemandNote" });
         },
     },
 };

@@ -8,7 +8,7 @@ const DemandNote = () => import("./components/DemandNote.vue");
 const path = "d3cfdb7594b592d36a0179aaa03c3480";
 export default [
     {
-        path: path + "/dashboard",
+        path: "/",
         name: "Dashboard",
         component: Dashboard,
     },
