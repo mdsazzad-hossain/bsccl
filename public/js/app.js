@@ -67287,10 +67287,8 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
-                  _vm._m(5),
-                  _vm._v(" "),
                   _c("li", { staticClass: "nav-item" }, [
-                    _vm._m(6),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("ul", { staticClass: "nav nav-treeview" }, [
                       _c(
@@ -67315,9 +67313,9 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _vm._m(7),
+                      _vm._m(6),
                       _vm._v(" "),
-                      _vm._m(8),
+                      _vm._m(7),
                     ]),
                   ]),
                 ]
@@ -67329,7 +67327,7 @@ var render = function () {
       _vm._v(" "),
       _c("router-view", { key: _vm.$route.fullPath }),
       _vm._v(" "),
-      _vm._m(9),
+      _vm._m(8),
     ],
     1
   )
@@ -67447,44 +67445,6 @@ var staticRenderFns = [
           "\n                                Configuration\n                                "
         ),
         _c("i", { staticClass: "right fas fa-angle-left" }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _c("i", {
-          staticClass: "fa fa-users",
-          attrs: { "aria-hidden": "true" },
-        }),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                                Users\n                                "
-          ),
-          _c("i", { staticClass: "right fas fa-angle-left" }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav nav-treeview" }, [
-        _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-circle nav-icon" }),
-            _vm._v(" "),
-            _c("p", [_vm._v("Customer List")]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "far fa-circle nav-icon" }),
-            _vm._v(" "),
-            _c("p", [_vm._v("System User List")]),
-          ]),
-        ]),
       ]),
     ])
   },

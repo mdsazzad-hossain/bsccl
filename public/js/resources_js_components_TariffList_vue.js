@@ -2065,7 +2065,7 @@ var render = function () {
                                           [
                                             _c("ValidationProvider", {
                                               attrs: {
-                                                name: "Users",
+                                                name: "Customers",
                                                 rules: "required|min_value:1",
                                               },
                                               scopedSlots: _vm._u(
@@ -2083,7 +2083,9 @@ var render = function () {
                                                           },
                                                           [
                                                             _c("label", [
-                                                              _vm._v("Users"),
+                                                              _vm._v(
+                                                                "Customers"
+                                                              ),
                                                             ]),
                                                             _vm._v(" "),
                                                             _c(
@@ -2914,7 +2916,7 @@ var render = function () {
                           ],
                           null,
                           false,
-                          2874149675
+                          2640255627
                         ),
                       }),
                     ],

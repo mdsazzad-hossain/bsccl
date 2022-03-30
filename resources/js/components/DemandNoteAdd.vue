@@ -24,12 +24,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <ValidationProvider
-                                                name="Users"
+                                                name="Customers"
                                                 rules="required|min_value:1"
                                                 v-slot="{ errors }"
                                             >
                                                 <div class="form-group">
-                                                    <label>Users</label>
+                                                    <label>Customers</label>
                                                     <select
                                                         class="form-control"
                                                         style="width: 100%"
