@@ -64,16 +64,16 @@
                                                     <input
                                                         class="custom-control-input"
                                                         type="checkbox"
-                                                        v-model="
-                                                            item.title_value
-                                                        "
+                                                        v-model="item.m_id"
                                                         :id="'menu' + index"
                                                         :value="index + 1"
                                                     />
                                                     <label
                                                         :for="'menu' + index"
                                                         class="custom-control-label"
-                                                        >{{ item.title }}</label
+                                                        >{{
+                                                            item.menu_name
+                                                        }}</label
                                                     >
                                                 </div>
 
@@ -219,38 +219,39 @@
 </template>
 <script>
 export default {
+    props: ["rpData"],
     data() {
         return {
             loading: false,
-            rpData: {
-                role_name: "",
-                menus: [
-                    {
-                        title: "Users",
-                        title_value: "",
-                        permission: [
-                            {
-                                create: "",
-                                edit: "",
-                                update: "",
-                                delete: "",
-                            },
-                        ],
-                    },
-                    {
-                        title: "Services",
-                        title_value: "",
-                        permission: [
-                            {
-                                create: "",
-                                edit: "",
-                                update: "",
-                                delete: "",
-                            },
-                        ],
-                    },
-                ],
-            },
+            // rpData: {
+            //     role_name: "",
+            //     menus: [
+            //         {
+            //             menu_name: "Users",
+            //             m_id: "",
+            //             permission: [
+            //                 {
+            //                     create: "",
+            //                     edit: "",
+            //                     update: "",
+            //                     delete: "",
+            //                 },
+            //             ],
+            //         },
+            //         {
+            //             menu_name: "Services",
+            //             m_id: "",
+            //             permission: [
+            //                 {
+            //                     create: "",
+            //                     edit: "",
+            //                     update: "",
+            //                     delete: "",
+            //                 },
+            //             ],
+            //         },
+            //     ],
+            // },
         };
     },
     methods: {

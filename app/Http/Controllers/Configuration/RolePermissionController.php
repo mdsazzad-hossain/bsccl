@@ -12,7 +12,7 @@ class RolePermissionController extends Controller
 {
     public function index()
     {
-        $roles = Role::orderBy('id', 'DESC')->get();
+        $roles = Role::with('menus.permission')->orderBy('id', 'DESC')->get();
         return response([
             'data'=>$roles
         ], 200);
@@ -33,8 +33,8 @@ class RolePermissionController extends Controller
                 if ($value['title_value']) {
                     $menu = Menu::create([
                         'role_id'=> $roleModels->id,
-                        'menu_name'=> $value['title'],
-                        'm_id'=> $value['title_value']
+                        'menu_name'=> $value['menu_name'],
+                        'm_id'=> $value['m_id']
                     ]);
                     $menu->create_permission()->delete();
                     $menu->create_permission()->createMany($value['permission']);

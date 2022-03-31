@@ -17,4 +17,6 @@ class Role extends Model
     {
         return $this->hasMany(Menu::class, 'role_id');
     }
+
+
 }

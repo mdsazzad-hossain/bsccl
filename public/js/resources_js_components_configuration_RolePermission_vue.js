@@ -231,31 +231,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ["rpData"],
   data: function data() {
     return {
-      loading: false,
-      rpData: {
-        role_name: "",
-        menus: [{
-          title: "Users",
-          title_value: "",
-          permission: [{
-            create: "",
-            edit: "",
-            update: "",
-            "delete": ""
-          }]
-        }, {
-          title: "Services",
-          title_value: "",
-          permission: [{
-            create: "",
-            edit: "",
-            update: "",
-            "delete": ""
-          }]
-        }]
-      }
+      loading: false // rpData: {
+      //     role_name: "",
+      //     menus: [
+      //         {
+      //             menu_name: "Users",
+      //             m_id: "",
+      //             permission: [
+      //                 {
+      //                     create: "",
+      //                     edit: "",
+      //                     update: "",
+      //                     delete: "",
+      //                 },
+      //             ],
+      //         },
+      //         {
+      //             menu_name: "Services",
+      //             m_id: "",
+      //             permission: [
+      //                 {
+      //                     create: "",
+      //                     edit: "",
+      //                     update: "",
+      //                     delete: "",
+      //                 },
+      //             ],
+      //         },
+      //     ],
+      // },
+
     };
   },
   methods: {
@@ -293,6 +301,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _AddRole_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddRole.vue */ "./resources/js/components/configuration/AddRole.vue");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -394,6 +409,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loading: false,
+      visibleModal: false,
+      editItem: "",
       listData: []
     };
   },
@@ -401,6 +418,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getRoleList();
   },
   methods: {
+    edit: function edit(item) {
+      this.editItem = item;
+      this.visibleModal = true;
+      $("#role-permission-modal").modal("show");
+    },
     getRoleList: function getRoleList() {
       var _this = this;
 
@@ -1156,9 +1178,8 @@ var render = function () {
                                                     {
                                                       name: "model",
                                                       rawName: "v-model",
-                                                      value: item.title_value,
-                                                      expression:
-                                                        "\n                                                        item.title_value\n                                                    ",
+                                                      value: item.m_id,
+                                                      expression: "item.m_id",
                                                     },
                                                   ],
                                                   staticClass:
@@ -1170,18 +1191,17 @@ var render = function () {
                                                   domProps: {
                                                     value: index + 1,
                                                     checked: Array.isArray(
-                                                      item.title_value
+                                                      item.m_id
                                                     )
                                                       ? _vm._i(
-                                                          item.title_value,
+                                                          item.m_id,
                                                           index + 1
                                                         ) > -1
-                                                      : item.title_value,
+                                                      : item.m_id,
                                                   },
                                                   on: {
                                                     change: function ($event) {
-                                                      var $$a =
-                                                          item.title_value,
+                                                      var $$a = item.m_id,
                                                         $$el = $event.target,
                                                         $$c = $$el.checked
                                                           ? true
@@ -1193,14 +1213,14 @@ var render = function () {
                                                           $$i < 0 &&
                                                             _vm.$set(
                                                               item,
-                                                              "title_value",
+                                                              "m_id",
                                                               $$a.concat([$$v])
                                                             )
                                                         } else {
                                                           $$i > -1 &&
                                                             _vm.$set(
                                                               item,
-                                                              "title_value",
+                                                              "m_id",
                                                               $$a
                                                                 .slice(0, $$i)
                                                                 .concat(
@@ -1213,7 +1233,7 @@ var render = function () {
                                                       } else {
                                                         _vm.$set(
                                                           item,
-                                                          "title_value",
+                                                          "m_id",
                                                           $$c
                                                         )
                                                       }
@@ -1230,7 +1250,11 @@ var render = function () {
                                                       for: "menu" + index,
                                                     },
                                                   },
-                                                  [_vm._v(_vm._s(item.title))]
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(item.menu_name)
+                                                    ),
+                                                  ]
                                                 ),
                                               ]
                                             ),
@@ -1923,7 +1947,31 @@ var render = function () {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(item.status))]),
                               _vm._v(" "),
-                              _vm._m(2, true),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: {
+                                      type: "button",
+                                      title: "View Details",
+                                    },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.edit(item)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "fa fa-edit action-btn-font m-0",
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(2, true),
+                              ]),
                             ])
                           }),
                         ],
@@ -1938,7 +1986,13 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("add-role", { ref: "role-permission-modal" }),
+      _vm.visibleModal
+        ? _c("add-role", {
+            ref: "role-permission-modal",
+            attrs: { rpData: _vm.editItem },
+            on: { executeMethod: _vm.getRoleList },
+          })
+        : _vm._e(),
     ],
     1
   )
@@ -1998,30 +2052,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success btn-sm",
-          attrs: { type: "button", title: "View Details" },
-        },
-        [_c("i", { staticClass: "fa fa-edit action-btn-font m-0" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger btn-sm",
-          attrs: { type: "button", title: "Delete User" },
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-trash action-btn-font m-0",
-            attrs: { "aria-hidden": "true" },
-          }),
-        ]
-      ),
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-danger btn-sm",
+        attrs: { type: "button", title: "Delete User" },
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-trash action-btn-font m-0",
+          attrs: { "aria-hidden": "true" },
+        }),
+      ]
+    )
   },
 ]
 render._withStripped = true

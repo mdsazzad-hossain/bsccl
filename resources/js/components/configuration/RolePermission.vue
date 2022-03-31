@@ -63,6 +63,7 @@
                                                     type="button"
                                                     title="View Details"
                                                     class="btn btn-success btn-sm"
+                                                    @click="edit(item)"
                                                 >
                                                     <i
                                                         class="fa fa-edit action-btn-font m-0"
@@ -88,7 +89,12 @@
                 </div>
             </div>
         </section>
-        <add-role ref="role-permission-modal"></add-role>
+        <add-role
+            ref="role-permission-modal"
+            @executeMethod="getRoleList"
+            :rpData="editItem"
+            v-if="visibleModal"
+        />
     </div>
 </template>
 <script>
@@ -100,6 +106,8 @@ export default {
     data() {
         return {
             loading: false,
+            visibleModal: false,
+            editItem: "",
             listData: [],
         };
     },
@@ -107,6 +115,11 @@ export default {
         this.getRoleList();
     },
     methods: {
+        edit(item) {
+            this.editItem = item;
+            this.visibleModal = true;
+            $("#role-permission-modal").modal("show");
+        },
         getRoleList() {
             this.loading = true;
             axios.get("/role-permission-list").then((response) => {
