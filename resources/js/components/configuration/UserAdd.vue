@@ -194,6 +194,9 @@
                                                         >
                                                             {{ item.role_name }}
                                                         </option>
+                                                        <option value="N/A">
+                                                            N/A
+                                                        </option>
                                                     </select>
                                                     <span
                                                         class="invalid-feedback d-block"
@@ -312,7 +315,8 @@ export default {
                         icon: "success",
                         title: "Data Upload Successfull.",
                     });
-                    // window.location.href = "/";
+                    this.$emit("executeMethod");
+                    $("#user-add-modal").modal("hide");
                 })
                 .catch(() => {
                     this.loading = false;
@@ -320,6 +324,7 @@ export default {
                         icon: "warning",
                         title: "wrong creidentials!",
                     });
+                    $("#user-add-modal").modal("hide");
                 });
         },
         getRole() {

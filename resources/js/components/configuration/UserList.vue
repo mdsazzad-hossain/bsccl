@@ -99,7 +99,7 @@
                 </div>
             </div>
         </section>
-        <user-add />
+        <user-add @executeMethod="getUserList" />
     </div>
 </template>
 <script>

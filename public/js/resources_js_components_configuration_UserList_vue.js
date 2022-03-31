@@ -65,6 +65,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ImportUser_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImportUser.vue */ "./resources/js/components/configuration/ImportUser.vue");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+//
+//
+//
 //
 //
 //
@@ -377,13 +381,18 @@ __webpack_require__.r(__webpack_exports__);
         Toast.fire({
           icon: "success",
           title: "Data Upload Successfull."
-        }); // window.location.href = "/";
+        });
+
+        _this.$emit("executeMethod");
+
+        $("#user-add-modal").modal("hide");
       })["catch"](function () {
         _this.loading = false;
         Swal.fire({
           icon: "warning",
           title: "wrong creidentials!"
         });
+        $("#user-add-modal").modal("hide");
       });
     },
     getRole: function getRole() {
@@ -2166,6 +2175,21 @@ var render = function () {
                                                                       )
                                                                     }
                                                                   ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "option",
+                                                                    {
+                                                                      attrs: {
+                                                                        value:
+                                                                          "N/A",
+                                                                      },
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                        N/A\n                                                    "
+                                                                      ),
+                                                                    ]
+                                                                  ),
                                                                 ],
                                                                 2
                                                               ),
@@ -2453,7 +2477,7 @@ var render = function () {
                             ],
                             null,
                             false,
-                            1638814065
+                            1997014946
                           ),
                         }),
                       ],
@@ -2586,7 +2610,7 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("user-add"),
+      _c("user-add", { on: { executeMethod: _vm.getUserList } }),
     ],
     1
   )
