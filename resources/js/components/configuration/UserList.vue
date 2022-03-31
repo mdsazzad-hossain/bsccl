@@ -9,8 +9,7 @@
                     <div class="col-md-6 text-right">
                         <button
                             type="button"
-                            data-toggle="modal"
-                            data-target="#user-add-modal"
+                            @click="showModal"
                             class="btn btn-outline-primary"
                         >
                             <i class="fa fa-plus mr-1"></i>
@@ -74,6 +73,7 @@
                                                     type="button"
                                                     title="View Details"
                                                     class="btn btn-success btn-sm"
+                                                    @click="edit(item)"
                                                 >
                                                     <i
                                                         class="fa fa-edit action-btn-font m-0"
@@ -99,7 +99,11 @@
                 </div>
             </div>
         </section>
-        <user-add @executeMethod="getUserList" />
+        <user-add
+            @executeMethod="getUserList"
+            :user="editItem"
+            v-if="visibleModal"
+        />
     </div>
 </template>
 <script>
@@ -111,13 +115,24 @@ export default {
     data() {
         return {
             loading: false,
+            visibleModal: false,
             listData: [],
+            editItem: "",
         };
     },
     created() {
         this.getUserList();
     },
     methods: {
+        edit(item) {
+            this.editItem = item;
+            this.visibleModal = true;
+            $("#user-add-modal").modal("show");
+        },
+        showModal() {
+            this.visibleModal = true;
+            $("#user-add-modal").modal("show");
+        },
         getUserList() {
             this.loading = true;
             axios.get("/get-user-list").then((response) => {

@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index()
     {
         $data = auth()->user();
-        $model = User::where('role',3)->orderBy('id', 'DESC')->get();
+        $model = User::orderBy('id', 'DESC')->get();
         return response([
             'msg'=> 'Success',
             'data'=> $data,
@@ -21,7 +21,7 @@ class UserController extends Controller
     public function system_user()
     {
         $data = auth()->user();
-        $model = User::where('role','!=',3)->orderBy('id', 'DESC')->get();
+        $model = User::orderBy('id', 'DESC')->get();
         return view('pages.user-module.system-user-list',[
             'data'=>$data,
             'users'=>$model

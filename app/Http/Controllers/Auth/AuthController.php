@@ -21,7 +21,12 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $model = User::create($request->all());
+        if($request->id){
+            $model = User::find($request->id);
+            $model->update($request->all());
+        }else{
+            $model = User::create($request->all());
+        }
         return response()->json([
             'message'=>'success'
         ],200);

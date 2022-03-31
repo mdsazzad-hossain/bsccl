@@ -85,7 +85,7 @@
                                         <div class="col-md-6">
                                             <ValidationProvider
                                                 name="Phone Number"
-                                                rules="required"
+                                                rules="required|min:11|max:11"
                                                 v-slot="{ errors }"
                                             >
                                                 <div class="form-group">
@@ -109,7 +109,7 @@
                                         <div class="col-md-6">
                                             <ValidationProvider
                                                 name="Password"
-                                                rules="required"
+                                                rules="required|min:8|max:8"
                                                 v-slot="{ errors }"
                                             >
                                                 <div class="form-group">
@@ -281,20 +281,21 @@ export default {
     components: {
         ImportUser,
     },
+    props: ["user"],
     data() {
         return {
             loading: false,
             visibleForm: false,
-            user: {
-                name: "",
-                email: "",
-                phone: "",
-                password: "",
-                type: 0,
-                role: 0,
-                address: "",
-                designation: "",
-            },
+            // user: {
+            //     name: "",
+            //     email: "",
+            //     phone: "",
+            //     password: "",
+            //     type: 0,
+            //     role: 0,
+            //     address: "",
+            //     designation: "",
+            // },
             roleList: [],
         };
     },
@@ -307,6 +308,7 @@ export default {
             this.visibleForm = !this.visibleForm;
         },
         onSubmit() {
+            this.loading = true;
             axios
                 .post("/store", this.user)
                 .then((res) => {

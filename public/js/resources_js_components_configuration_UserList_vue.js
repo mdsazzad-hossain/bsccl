@@ -348,20 +348,21 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ImportUser: _ImportUser_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: ["user"],
   data: function data() {
     return {
       loading: false,
       visibleForm: false,
-      user: {
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
-        type: 0,
-        role: 0,
-        address: "",
-        designation: ""
-      },
+      // user: {
+      //     name: "",
+      //     email: "",
+      //     phone: "",
+      //     password: "",
+      //     type: 0,
+      //     role: 0,
+      //     address: "",
+      //     designation: "",
+      // },
       roleList: []
     };
   },
@@ -376,6 +377,7 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this = this;
 
+      this.loading = true;
       axios.post("/store", this.user).then(function (res) {
         _this.loading = false;
         Toast.fire({
@@ -418,6 +420,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _UserAdd_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserAdd.vue */ "./resources/js/components/configuration/UserAdd.vue");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+//
+//
+//
+//
 //
 //
 //
@@ -530,13 +537,24 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loading: false,
-      listData: []
+      visibleModal: false,
+      listData: [],
+      editItem: ""
     };
   },
   created: function created() {
     this.getUserList();
   },
   methods: {
+    edit: function edit(item) {
+      this.editItem = item;
+      this.visibleModal = true;
+      $("#user-add-modal").modal("show");
+    },
+    showModal: function showModal() {
+      this.visibleModal = true;
+      $("#user-add-modal").modal("show");
+    },
     getUserList: function getUserList() {
       var _this = this;
 
@@ -1640,7 +1658,8 @@ var render = function () {
                                               _c("ValidationProvider", {
                                                 attrs: {
                                                   name: "Phone Number",
-                                                  rules: "required",
+                                                  rules:
+                                                    "required|min:11|max:11",
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -1754,7 +1773,7 @@ var render = function () {
                                               _c("ValidationProvider", {
                                                 attrs: {
                                                   name: "Password",
-                                                  rules: "required",
+                                                  rules: "required|min:8|max:8",
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -2477,7 +2496,7 @@ var render = function () {
                             ],
                             null,
                             false,
-                            1997014946
+                            117939106
                           ),
                         }),
                       ],
@@ -2539,7 +2558,30 @@ var render = function () {
     "div",
     { staticClass: "content-wrapper" },
     [
-      _vm._m(0),
+      _c("section", { staticClass: "content-header" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mb-2" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.showModal },
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus mr-1" }),
+                  _vm._v(
+                    "\n                        Add New User\n                    "
+                  ),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
@@ -2595,7 +2637,31 @@ var render = function () {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(item.address))]),
                               _vm._v(" "),
-                              _vm._m(2, true),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: {
+                                      type: "button",
+                                      title: "View Details",
+                                    },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.edit(item)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass:
+                                        "fa fa-edit action-btn-font m-0",
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(2, true),
+                              ]),
                             ])
                           }),
                         ],
@@ -2610,7 +2676,12 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("user-add", { on: { executeMethod: _vm.getUserList } }),
+      _vm.visibleModal
+        ? _c("user-add", {
+            attrs: { user: _vm.editItem },
+            on: { executeMethod: _vm.getUserList },
+          })
+        : _vm._e(),
     ],
     1
   )
@@ -2620,34 +2691,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", [_vm._v("User/Coustomer List")]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 text-right" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#user-add-modal",
-                },
-              },
-              [
-                _c("i", { staticClass: "fa fa-plus mr-1" }),
-                _vm._v(
-                  "\n                        Add New User\n                    "
-                ),
-              ]
-            ),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("h1", [_vm._v("User/Coustomer List")]),
     ])
   },
   function () {
@@ -2674,30 +2719,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success btn-sm",
-          attrs: { type: "button", title: "View Details" },
-        },
-        [_c("i", { staticClass: "fa fa-edit action-btn-font m-0" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger btn-sm",
-          attrs: { type: "button", title: "Delete User" },
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-trash action-btn-font m-0",
-            attrs: { "aria-hidden": "true" },
-          }),
-        ]
-      ),
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-danger btn-sm",
+        attrs: { type: "button", title: "Delete User" },
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-trash action-btn-font m-0",
+          attrs: { "aria-hidden": "true" },
+        }),
+      ]
+    )
   },
 ]
 render._withStripped = true
