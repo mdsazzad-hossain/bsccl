@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('type')->nullable()->comment('1=IPLC, 2=IP Transit, 3=Colocation Service');
             $table->tinyInteger('role')->default(1)->comment('1=User, 2=Super Admin, 3=Admin');
             $table->string('address')->nullable();
+            $table->string('designation',20)->nullable();
             $table->timestamps();
         });
     }

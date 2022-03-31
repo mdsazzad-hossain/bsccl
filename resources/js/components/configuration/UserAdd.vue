@@ -155,10 +155,7 @@
                                                             IPLC
                                                         </option>
                                                         <option value="2">
-                                                            IP Transit
-                                                        </option>
-                                                        <option value="3">
-                                                            Colocation Service
+                                                            IIG
                                                         </option>
                                                     </select>
                                                     <span
@@ -182,16 +179,20 @@
                                                         v-model="user.role"
                                                     >
                                                         <option
-                                                            value="3"
+                                                            value=""
                                                             selected="selected"
+                                                            disabled
                                                         >
-                                                            User
+                                                            Select Role
                                                         </option>
-                                                        <option value="2">
-                                                            Admin
-                                                        </option>
-                                                        <option value="1">
-                                                            Super Admin
+                                                        <option
+                                                            v-for="(
+                                                                item, index
+                                                            ) in roleList"
+                                                            :key="index"
+                                                            :value="item.id"
+                                                        >
+                                                            {{ item.role_name }}
                                                         </option>
                                                     </select>
                                                     <span
@@ -201,27 +202,58 @@
                                                 </div>
                                             </ValidationProvider>
                                         </div>
-                                    </div>
-                                    <ValidationProvider
-                                        name="Address"
-                                        rules="required"
-                                        v-slot="{ errors }"
-                                    >
-                                        <div class="form-group">
-                                            <label for="address">Address</label>
-                                            <input
-                                                type="text"
-                                                v-model="user.address"
-                                                class="form-control"
-                                                id="address"
-                                                placeholder="Enter your address"
-                                            />
-                                            <span
-                                                class="invalid-feedback d-block"
-                                                >{{ errors[0] }}</span
+                                        <div class="col-md-6">
+                                            <ValidationProvider
+                                                name="Designation"
+                                                rules="required"
+                                                v-slot="{ errors }"
                                             >
+                                                <div class="form-group">
+                                                    <label for="designation"
+                                                        >Designation</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        v-model="
+                                                            user.designation
+                                                        "
+                                                        class="form-control"
+                                                        id="designation"
+                                                        placeholder="Enter designation"
+                                                    />
+                                                    <span
+                                                        class="invalid-feedback d-block"
+                                                        >{{ errors[0] }}</span
+                                                    >
+                                                </div>
+                                            </ValidationProvider>
                                         </div>
-                                    </ValidationProvider>
+                                        <div class="col-md-6">
+                                            <ValidationProvider
+                                                name="Address"
+                                                rules="required"
+                                                v-slot="{ errors }"
+                                            >
+                                                <div class="form-group">
+                                                    <label for="address"
+                                                        >Address</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        v-model="user.address"
+                                                        class="form-control"
+                                                        id="address"
+                                                        placeholder="Enter your address"
+                                                    />
+                                                    <span
+                                                        class="invalid-feedback d-block"
+                                                        >{{ errors[0] }}</span
+                                                    >
+                                                </div>
+                                            </ValidationProvider>
+                                        </div>
+                                    </div>
+
                                     <div class="text-right">
                                         <button
                                             type="submit"
@@ -258,11 +290,14 @@ export default {
                 type: 0,
                 role: 0,
                 address: "",
+                designation: "",
             },
+            roleList: [],
         };
     },
     created() {
         this.visibleForm = true;
+        this.getRole();
     },
     methods: {
         visibleAction() {
@@ -286,6 +321,14 @@ export default {
                         title: "wrong creidentials!",
                     });
                 });
+        },
+        getRole() {
+            axios
+                .get("/role-permission-list")
+                .then((res) => {
+                    this.roleList = res.data.data;
+                })
+                .catch(() => {});
         },
     },
 };

@@ -307,6 +307,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -323,12 +355,15 @@ __webpack_require__.r(__webpack_exports__);
         password: "",
         type: 0,
         role: 0,
-        address: ""
-      }
+        address: "",
+        designation: ""
+      },
+      roleList: []
     };
   },
   created: function created() {
     this.visibleForm = true;
+    this.getRole();
   },
   methods: {
     visibleAction: function visibleAction() {
@@ -350,6 +385,13 @@ __webpack_require__.r(__webpack_exports__);
           title: "wrong creidentials!"
         });
       });
+    },
+    getRole: function getRole() {
+      var _this2 = this;
+
+      axios.get("/role-permission-list").then(function (res) {
+        _this2.roleList = res.data.data;
+      })["catch"](function () {});
     }
   }
 });
@@ -1950,22 +1992,7 @@ var render = function () {
                                                                     },
                                                                     [
                                                                       _vm._v(
-                                                                        "\n                                                        IP Transit\n                                                    "
-                                                                      ),
-                                                                    ]
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "option",
-                                                                    {
-                                                                      attrs: {
-                                                                        value:
-                                                                          "3",
-                                                                      },
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        Colocation Service\n                                                    "
+                                                                        "\n                                                        IIG\n                                                    "
                                                                       ),
                                                                     ]
                                                                   ),
@@ -2097,49 +2124,279 @@ var render = function () {
                                                                     {
                                                                       attrs: {
                                                                         value:
-                                                                          "3",
+                                                                          "",
                                                                         selected:
                                                                           "selected",
+                                                                        disabled:
+                                                                          "",
                                                                       },
                                                                     },
                                                                     [
                                                                       _vm._v(
-                                                                        "\n                                                        User\n                                                    "
+                                                                        "\n                                                        Select Role\n                                                    "
                                                                       ),
                                                                     ]
                                                                   ),
                                                                   _vm._v(" "),
-                                                                  _c(
-                                                                    "option",
-                                                                    {
-                                                                      attrs: {
-                                                                        value:
-                                                                          "2",
-                                                                      },
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        Admin\n                                                    "
-                                                                      ),
-                                                                    ]
+                                                                  _vm._l(
+                                                                    _vm.roleList,
+                                                                    function (
+                                                                      item,
+                                                                      index
+                                                                    ) {
+                                                                      return _c(
+                                                                        "option",
+                                                                        {
+                                                                          key: index,
+                                                                          domProps:
+                                                                            {
+                                                                              value:
+                                                                                item.id,
+                                                                            },
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            "\n                                                        " +
+                                                                              _vm._s(
+                                                                                item.role_name
+                                                                              ) +
+                                                                              "\n                                                    "
+                                                                          ),
+                                                                        ]
+                                                                      )
+                                                                    }
                                                                   ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "option",
-                                                                    {
-                                                                      attrs: {
-                                                                        value:
-                                                                          "1",
-                                                                      },
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                        Super Admin\n                                                    "
-                                                                      ),
-                                                                    ]
+                                                                ],
+                                                                2
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "invalid-feedback d-block",
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      errors[0]
+                                                                    )
                                                                   ),
                                                                 ]
                                                               ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      },
+                                                    },
+                                                  ],
+                                                  null,
+                                                  true
+                                                ),
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-6" },
+                                            [
+                                              _c("ValidationProvider", {
+                                                attrs: {
+                                                  name: "Designation",
+                                                  rules: "required",
+                                                },
+                                                scopedSlots: _vm._u(
+                                                  [
+                                                    {
+                                                      key: "default",
+                                                      fn: function (ref) {
+                                                        var errors = ref.errors
+                                                        return [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "form-group",
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  attrs: {
+                                                                    for: "designation",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Designation"
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.user
+                                                                        .designation,
+                                                                    expression:
+                                                                      "\n                                                        user.designation\n                                                    ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                attrs: {
+                                                                  type: "text",
+                                                                  id: "designation",
+                                                                  placeholder:
+                                                                    "Enter designation",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    _vm.user
+                                                                      .designation,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.user,
+                                                                        "designation",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "invalid-feedback d-block",
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      errors[0]
+                                                                    )
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      },
+                                                    },
+                                                  ],
+                                                  null,
+                                                  true
+                                                ),
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-6" },
+                                            [
+                                              _c("ValidationProvider", {
+                                                attrs: {
+                                                  name: "Address",
+                                                  rules: "required",
+                                                },
+                                                scopedSlots: _vm._u(
+                                                  [
+                                                    {
+                                                      key: "default",
+                                                      fn: function (ref) {
+                                                        var errors = ref.errors
+                                                        return [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "form-group",
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  attrs: {
+                                                                    for: "address",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Address"
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.user
+                                                                        .address,
+                                                                    expression:
+                                                                      "user.address",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                attrs: {
+                                                                  type: "text",
+                                                                  id: "address",
+                                                                  placeholder:
+                                                                    "Enter your address",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    _vm.user
+                                                                      .address,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.user,
+                                                                        "address",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
                                                               _vm._v(" "),
                                                               _c(
                                                                 "span",
@@ -2170,103 +2427,6 @@ var render = function () {
                                           ),
                                         ]),
                                         _vm._v(" "),
-                                        _c("ValidationProvider", {
-                                          attrs: {
-                                            name: "Address",
-                                            rules: "required",
-                                          },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "default",
-                                                fn: function (ref) {
-                                                  var errors = ref.errors
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "form-group",
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "label",
-                                                          {
-                                                            attrs: {
-                                                              for: "address",
-                                                            },
-                                                          },
-                                                          [_vm._v("Address")]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c("input", {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.user
-                                                                  .address,
-                                                              expression:
-                                                                "user.address",
-                                                            },
-                                                          ],
-                                                          staticClass:
-                                                            "form-control",
-                                                          attrs: {
-                                                            type: "text",
-                                                            id: "address",
-                                                            placeholder:
-                                                              "Enter your address",
-                                                          },
-                                                          domProps: {
-                                                            value:
-                                                              _vm.user.address,
-                                                          },
-                                                          on: {
-                                                            input: function (
-                                                              $event
-                                                            ) {
-                                                              if (
-                                                                $event.target
-                                                                  .composing
-                                                              ) {
-                                                                return
-                                                              }
-                                                              _vm.$set(
-                                                                _vm.user,
-                                                                "address",
-                                                                $event.target
-                                                                  .value
-                                                              )
-                                                            },
-                                                          },
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass:
-                                                              "invalid-feedback d-block",
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(errors[0])
-                                                            ),
-                                                          ]
-                                                        ),
-                                                      ]
-                                                    ),
-                                                  ]
-                                                },
-                                              },
-                                            ],
-                                            null,
-                                            true
-                                          ),
-                                        }),
-                                        _vm._v(" "),
                                         _c(
                                           "div",
                                           { staticClass: "text-right" },
@@ -2285,8 +2445,7 @@ var render = function () {
                                             ),
                                           ]
                                         ),
-                                      ],
-                                      1
+                                      ]
                                     ),
                                   ]
                                 },
@@ -2294,7 +2453,7 @@ var render = function () {
                             ],
                             null,
                             false,
-                            2197983425
+                            1638814065
                           ),
                         }),
                       ],
