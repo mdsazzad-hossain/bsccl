@@ -33,8 +33,9 @@
                                                         >Service</label
                                                     >
                                                     <input
+                                                        readonly
                                                         type="text"
-                                                        v-model="tariff.service"
+                                                        v-model="item.service"
                                                         class="form-control"
                                                         id="service"
                                                         placeholder="Enter service name"
@@ -57,9 +58,10 @@
                                                         >Sub Service</label
                                                     >
                                                     <input
+                                                        readonly
                                                         type="text"
                                                         v-model="
-                                                            tariff.sub_service
+                                                            item.sub_service
                                                         "
                                                         class="form-control"
                                                         id="sub"
@@ -85,7 +87,7 @@
                                                     <input
                                                         type="text"
                                                         v-model="
-                                                            tariff.capacity_name
+                                                            item.capacity_name
                                                         "
                                                         class="form-control"
                                                         id="capacity"
@@ -110,7 +112,7 @@
                                                     >
                                                     <input
                                                         type="number"
-                                                        v-model="tariff.charge"
+                                                        v-model="item.charge"
                                                         class="form-control"
                                                         id="charge"
                                                         placeholder="Enter charge"
@@ -147,15 +149,15 @@ export default {
         return {
             loading: false,
             visibleForm: false,
-            tariff: {
-                service_id: "",
-                service: "",
-                sub_service_id: "",
-                sub_service: "",
-                tariff_id: "",
-                capacity_name: "",
-                charge: "",
-            },
+            // tariff: {
+            //     service_id: "",
+            //     service: "",
+            //     sub_service_id: "",
+            //     sub_service: "",
+            //     tariff_id: "",
+            //     capacity_name: "",
+            //     charge: "",
+            // },
         };
     },
     created() {
@@ -165,16 +167,12 @@ export default {
     methods: {
         getData() {
             if (this.item) {
-                this.tariff = this.item;
-                console.log(this.tariff);
+                this.item = this.item;
             }
-        },
-        visibleAction() {
-            this.visibleForm = !this.visibleForm;
         },
         onSubmit() {
             axios
-                .post("/capacity-update", this.tariff)
+                .post("/capacity-update", this.item)
                 .then((res) => {
                     this.loading = false;
                     Toast.fire({

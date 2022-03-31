@@ -68,10 +68,18 @@ class ServiceController extends Controller
 
     public function update_capacity(Request $request)
     {
-        TariffCapacity::where('id', $request->tariff_id)->update([
-            'capacity_name'=> $request->capacity_name,
-            'charge'=> $request->charge
-        ]);
+        if ($request->tariff_id) {
+            TariffCapacity::where('id', $request->tariff_id)->update([
+                'capacity_name'=> $request->capacity_name,
+                'charge'=> $request->charge
+            ]);
+        }else{
+            TariffCapacity::create([
+                'sub_service_id'=> $request->sub_service_id,
+                'capacity_name'=> $request->capacity_name,
+                'charge'=> $request->charge
+            ]);
+        }
         return response([
             'msg'=> 'Success'
         ],200);

@@ -154,21 +154,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["item"],
   data: function data() {
     return {
       loading: false,
-      visibleForm: false,
-      tariff: {
-        service_id: "",
-        service: "",
-        sub_service_id: "",
-        sub_service: "",
-        tariff_id: "",
-        capacity_name: "",
-        charge: ""
-      }
+      visibleForm: false // tariff: {
+      //     service_id: "",
+      //     service: "",
+      //     sub_service_id: "",
+      //     sub_service: "",
+      //     tariff_id: "",
+      //     capacity_name: "",
+      //     charge: "",
+      // },
+
     };
   },
   created: function created() {
@@ -178,17 +180,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getData: function getData() {
       if (this.item) {
-        this.tariff = this.item;
-        console.log(this.tariff);
+        this.item = this.item;
       }
-    },
-    visibleAction: function visibleAction() {
-      this.visibleForm = !this.visibleForm;
     },
     onSubmit: function onSubmit() {
       var _this = this;
 
-      axios.post("/capacity-update", this.tariff).then(function (res) {
+      axios.post("/capacity-update", this.item).then(function (res) {
         _this.loading = false;
         Toast.fire({
           icon: "success",
@@ -1562,15 +1560,16 @@ var render = function () {
                                                                   rawName:
                                                                     "v-model",
                                                                   value:
-                                                                    _vm.tariff
+                                                                    _vm.item
                                                                       .service,
                                                                   expression:
-                                                                    "tariff.service",
+                                                                    "item.service",
                                                                 },
                                                               ],
                                                               staticClass:
                                                                 "form-control",
                                                               attrs: {
+                                                                readonly: "",
                                                                 type: "text",
                                                                 id: "service",
                                                                 placeholder:
@@ -1578,7 +1577,7 @@ var render = function () {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  _vm.tariff
+                                                                  _vm.item
                                                                     .service,
                                                               },
                                                               on: {
@@ -1594,7 +1593,7 @@ var render = function () {
                                                                       return
                                                                     }
                                                                     _vm.$set(
-                                                                      _vm.tariff,
+                                                                      _vm.item,
                                                                       "service",
                                                                       $event
                                                                         .target
@@ -1676,15 +1675,16 @@ var render = function () {
                                                                   rawName:
                                                                     "v-model",
                                                                   value:
-                                                                    _vm.tariff
+                                                                    _vm.item
                                                                       .sub_service,
                                                                   expression:
-                                                                    "\n                                                        tariff.sub_service\n                                                    ",
+                                                                    "\n                                                        item.sub_service\n                                                    ",
                                                                 },
                                                               ],
                                                               staticClass:
                                                                 "form-control",
                                                               attrs: {
+                                                                readonly: "",
                                                                 type: "text",
                                                                 id: "sub",
                                                                 placeholder:
@@ -1692,7 +1692,7 @@ var render = function () {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  _vm.tariff
+                                                                  _vm.item
                                                                     .sub_service,
                                                               },
                                                               on: {
@@ -1708,7 +1708,7 @@ var render = function () {
                                                                       return
                                                                     }
                                                                     _vm.$set(
-                                                                      _vm.tariff,
+                                                                      _vm.item,
                                                                       "sub_service",
                                                                       $event
                                                                         .target
@@ -1790,10 +1790,10 @@ var render = function () {
                                                                   rawName:
                                                                     "v-model",
                                                                   value:
-                                                                    _vm.tariff
+                                                                    _vm.item
                                                                       .capacity_name,
                                                                   expression:
-                                                                    "\n                                                        tariff.capacity_name\n                                                    ",
+                                                                    "\n                                                        item.capacity_name\n                                                    ",
                                                                 },
                                                               ],
                                                               staticClass:
@@ -1806,7 +1806,7 @@ var render = function () {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  _vm.tariff
+                                                                  _vm.item
                                                                     .capacity_name,
                                                               },
                                                               on: {
@@ -1822,7 +1822,7 @@ var render = function () {
                                                                       return
                                                                     }
                                                                     _vm.$set(
-                                                                      _vm.tariff,
+                                                                      _vm.item,
                                                                       "capacity_name",
                                                                       $event
                                                                         .target
@@ -1900,10 +1900,10 @@ var render = function () {
                                                                   rawName:
                                                                     "v-model",
                                                                   value:
-                                                                    _vm.tariff
+                                                                    _vm.item
                                                                       .charge,
                                                                   expression:
-                                                                    "tariff.charge",
+                                                                    "item.charge",
                                                                 },
                                                               ],
                                                               staticClass:
@@ -1916,7 +1916,7 @@ var render = function () {
                                                               },
                                                               domProps: {
                                                                 value:
-                                                                  _vm.tariff
+                                                                  _vm.item
                                                                     .charge,
                                                               },
                                                               on: {
@@ -1932,7 +1932,7 @@ var render = function () {
                                                                       return
                                                                     }
                                                                     _vm.$set(
-                                                                      _vm.tariff,
+                                                                      _vm.item,
                                                                       "charge",
                                                                       $event
                                                                         .target
@@ -1993,7 +1993,7 @@ var render = function () {
                           ],
                           null,
                           false,
-                          398659931
+                          3058308187
                         ),
                       }),
                     ],
